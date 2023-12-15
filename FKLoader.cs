@@ -31,6 +31,8 @@ namespace Graduate_Thesis_System
                 GridView.Rows[i].Cells[6].Text = university[Int32.Parse(GridView.Rows[i].Cells[6].Text)];
                 GridView.Rows[i].Cells[7].Text = institute[Int32.Parse(GridView.Rows[i].Cells[7].Text)];
                 GridView.Rows[i].Cells[8].Text = supervisor[Int32.Parse(GridView.Rows[i].Cells[8].Text)];
+                //Cosupervisor sonra bak
+                //GridView.Rows[i].Cells[9].Text = supervisor[Int32.Parse(GridView.Rows[i].Cells[8].Text)];
             }
         }
         public void LoadAuthorForeignKeyValues()

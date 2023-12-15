@@ -16,117 +16,20 @@ namespace Graduate_Thesis_System
 {
     public partial class Submission : System.Web.UI.Page
     {
-
+        UsefulFunctions usefulFunctions = new UsefulFunctions();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                FillTypeList();
-                FillInstituteList();
-                FillTopicList();
-                FillKeywordList();
-                FillLanguageList();
+                usefulFunctions.FillTypeList(DropDownList3);
+                usefulFunctions.FillInstituteList(DropDownList4);
+                usefulFunctions.FillTopicList(DropDownList1);
+                usefulFunctions.FillKeywordList(DropDownList2);
+                usefulFunctions.FillLanguageList(DropDownList5);
             }
         }
     
-        void FillTypeList()
-        {
-            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
-
-            string query = "SELECT TYPE_ID, TYPE_NAME FROM Type";
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-
-            DataSet ds = new DataSet();
-
-            da.Fill(ds);
-
-            DropDownList3.DataSource = ds;
-            DropDownList3.DataTextField = "TYPE_NAME";
-            DropDownList3.DataValueField = "TYPE_ID";
-            DropDownList3.DataBind();
-
-            con.Close();
-            da.Dispose();
-
-        }
-        void FillInstituteList()
-        {
-            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
-
-            string query = "SELECT INSTITUTE_ID, NAME FROM Institute";
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-
-            DataSet ds = new DataSet();
-
-            da.Fill(ds);
-
-            DropDownList4.DataSource = ds;
-            DropDownList4.DataTextField = "NAME";
-            DropDownList4.DataValueField = "INSTITUTE_ID";
-            DropDownList4.DataBind();
-
-            con.Close();
-            da.Dispose();
-
-        }
-        void FillTopicList()
-        {
-            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
-
-            string query = "SELECT TOPIC_NAME FROM Subject_Topic";
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-
-            DataSet ds = new DataSet();
-
-            da.Fill(ds);
-
-            DropDownList1.DataSource = ds;
-            DropDownList1.DataValueField = "TOPIC_NAME";
-            DropDownList1.DataBind();
-
-            con.Close();
-            da.Dispose();
-
-        }
-        void FillKeywordList()
-        {
-            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
-
-            string query = "SELECT KEYWORD_NAME FROM Keyword";
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-
-            DataSet ds = new DataSet();
-
-            da.Fill(ds);
-
-            DropDownList2.DataSource = ds;
-            DropDownList2.DataValueField = "KEYWORD_NAME";
-            DropDownList2.DataBind();
-
-            con.Close();
-            da.Dispose();
-
-        }
-
-        void FillLanguageList()
-        {
-            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
-
-            string query = "SELECT LANGUAGE_NAME FROM Language";
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-
-            DataSet ds = new DataSet();
-
-            da.Fill(ds);
-
-            DropDownList5.DataSource = ds;
-            DropDownList5.DataValueField = "LANGUAGE_NAME";
-            DropDownList5.DataBind();
-
-            con.Close();
-            da.Dispose();
-
-        }
+      
 
         int ReturnLastIdentity(SqlCommand command)
         {
