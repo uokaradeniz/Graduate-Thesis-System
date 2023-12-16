@@ -12,30 +12,19 @@ namespace Graduate_Thesis_System
 {
     public partial class Search : System.Web.UI.Page
     {
+        UsefulFunctions usefulFunctions;
         protected void Page_Load(object sender, EventArgs e)
         {
+            usefulFunctions = new UsefulFunctions();
             if (!IsPostBack)
-                FillSearchDDL(SearchDropDownList);
-        }
-
-        void FillSearchDDL(DropDownList dropDownList)
-        {
-            ListItem all = new ListItem("All");
-            dropDownList.Items.Add(all);
-
-            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
-            con.Open();
-            string query = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Thesis'";
-            SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
             {
-                ListItem item = new ListItem(reader["COLUMN_NAME"].ToString());
-                dropDownList.Items.Add(item);
+                ListItem all = new ListItem("All");
+                SearchDropDownList.Items.Add(all);
+                usefulFunctions.FillThesisDDL(SearchDropDownList);
             }
-
-            con.Close();
         }
+
+      
 
         protected void ContinueButton_Click(object sender, EventArgs e)
         {

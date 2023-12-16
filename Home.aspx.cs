@@ -17,25 +17,8 @@ namespace Graduate_Thesis_System
             if(!IsPostBack)
             {
                 FKLoader = new FKLoader();
-                BindGridView();
+                FKLoader.BindGridView(GridView1);
             }
-        }
-
-        public void BindGridView()
-        {
-            SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
-            string query = "SELECT * FROM Thesis";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, con);
-
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
-            FKLoader.UpdateGridView(GridView1);
-
-            con.Close();
-            dt.Dispose();
         }
 
         protected void SubmitButton_Click(object sender, EventArgs e)

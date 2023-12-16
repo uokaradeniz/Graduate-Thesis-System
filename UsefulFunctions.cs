@@ -110,7 +110,6 @@ namespace Graduate_Thesis_System
             da.Dispose();
 
         }
-
         public void FillCosupervisorList(DropDownList dropDownList)
         {
             SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
@@ -131,7 +130,6 @@ namespace Graduate_Thesis_System
             da.Dispose();
 
         }
-
         public void FillTopicList(DropDownList dropDownList)
         {
             SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
@@ -170,7 +168,6 @@ namespace Graduate_Thesis_System
             da.Dispose();
 
         }
-
         public void FillLanguageList(DropDownList dropDownList)
         {
             SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
@@ -190,5 +187,38 @@ namespace Graduate_Thesis_System
             da.Dispose();
 
         }
+        public void FillThesisDDL(DropDownList dropDownList)
+        {
+            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
+            con.Open();
+            string query = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Thesis'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                ListItem item = new ListItem(reader["COLUMN_NAME"].ToString());
+                dropDownList.Items.Add(item);
+            }
+
+            con.Close();
+        }
+        public void FillOnlyFKThesisDDL(DropDownList dropDownList)
+        {
+            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
+            con.Open();
+            string query = $"SELECT TOP 0 THESIS_NO, AUTHOR, TYPE, UNIVERSITY, INSTITUTE, SUPERVISOR FROM Thesis";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            for (int i = 0; i< reader.FieldCount; i++)
+            {
+                ListItem item = new ListItem(reader.GetName(i));
+                dropDownList.Items.Add(item);
+            }
+
+            con.Close();
+        }
+
+
     }
+
 }

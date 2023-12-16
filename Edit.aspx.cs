@@ -11,18 +11,28 @@ namespace Graduate_Thesis_System
 {
     public partial class Edit : System.Web.UI.Page
     {
-        static int Thesis_No;
+        static int ThesisNo;
+        static int AuthorId;
+        static int TypeId;
+        static int UniversityId;
+        static int InstituteId;
+        static int SupervisorId;
+
         FKLoader FKLoader;
         UsefulFunctions usefulFunctions;
         protected void Page_Load(object sender, EventArgs e)
         {
-            // if (!IsPostBack)
-            //  {
             OperationWindow.Visible = false;
-            ReturnHomeButton.Visible = false;
             FKLoader = new FKLoader();
             usefulFunctions = new UsefulFunctions();
-            // }
+            if (!IsPostBack)
+            {
+                usefulFunctions.FillOnlyFKThesisDDL(SelectionDropDownList);
+                SelectionDropDownList.Items[0].Text = "THESIS";
+                SelectionDropDownList.Items[0].Value = "THESIS_NO";
+                FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+
+            }
         }
 
         protected void EditButton_Click(object sender, EventArgs e)
@@ -30,7 +40,7 @@ namespace Graduate_Thesis_System
             SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
             try
             {
-                string query = "UPDATE Thesis SET TITLE = '" + Title_textbox.Text + "',ABSTRACT = '" + Abstract_textbox.Text + "', AUTHOR = '" + DropDownList3.SelectedValue + "',YEAR = '" + Year_textbox.Text + "', TYPE = '" + DropDownList3.SelectedValue + "', UNIVERSITY = '" + DropDownList7.SelectedValue + "' ,INSTITUTE = '" + DropDownList4.SelectedValue + "', SUPERVISOR = '" + DropDownList8.SelectedValue + "',CO_SUPERVISOR = '" + DropDownList9.SelectedValue + "',NUMBER_OF_PAGES = '" + Num_of_pages_textbox.Text + "',SUBJECT_TOPIC = '" + DropDownList1.SelectedItem + "', KEYWORD = '" + DropDownList2.SelectedItem + "', LANGUAGE = '" + DropDownList5.SelectedItem + "' WHERE THESIS_NO = '" + Thesis_No + "'";
+                string query = "UPDATE Thesis SET TITLE = '" + Title_textbox.Text + "',ABSTRACT = '" + Abstract_textbox.Text + "', AUTHOR = '" + DropDownList3.SelectedValue + "',YEAR = '" + Year_textbox.Text + "', TYPE = '" + DropDownList3.SelectedValue + "', UNIVERSITY = '" + DropDownList7.SelectedValue + "' ,INSTITUTE = '" + DropDownList4.SelectedValue + "', SUPERVISOR = '" + DropDownList8.SelectedValue + "',CO_SUPERVISOR = '" + DropDownList9.SelectedValue + "',NUMBER_OF_PAGES = '" + Num_of_pages_textbox.Text + "',SUBJECT_TOPIC = '" + DropDownList1.SelectedItem + "', KEYWORD = '" + DropDownList2.SelectedItem + "', LANGUAGE = '" + DropDownList5.SelectedItem + "' WHERE THESIS_NO = '" + ThesisNo + "'";
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -39,7 +49,6 @@ namespace Graduate_Thesis_System
                 Response.Write("Operation Successfull!");
             }
             catch (Exception ex) { Response.Write(ex); }
-            ReturnHomeButton.Visible = true;
 
         }
 
@@ -48,7 +57,7 @@ namespace Graduate_Thesis_System
             SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
             try
             {
-                string query = $"DELETE FROM Thesis WHERE THESIS_NO = {Thesis_No}";
+                string query = $"DELETE FROM Thesis WHERE THESIS_NO = {ThesisNo}";
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -57,13 +66,89 @@ namespace Graduate_Thesis_System
                 Response.Write("Operation Successfull!");
             }
             catch (Exception ex) { Response.Write(ex.Message); }
-            ReturnHomeButton.Visible = true;
 
         }
 
         protected void ContinueButton_Click(object sender, EventArgs e)
         {
             SelectionWindow.Visible = false;
+            if (SelectionDropDownList.SelectedValue == "THESIS_NO")
+            {
+                ThesisEditForm();
+            }
+            else if (SelectionDropDownList.SelectedValue == "AUTHOR")
+            {
+                AuthorId = Int32.Parse(TextBox1.Text);
+                string query = $"SELECT * FROM Author WHERE AUTHOR_ID = {AuthorId}";
+                OtherEditForms(query);
+
+            }
+            else if (SelectionDropDownList.SelectedValue == "TYPE")
+            {
+                TypeId = Int32.Parse(TextBox2.Text);
+
+                string query = $"SELECT * FROM Type WHERE TYPE_ID = {TypeId}";
+                OtherEditForms(query);
+            }
+            else if (SelectionDropDownList.SelectedValue == "UNIVERSITY")
+            {
+                UniversityId = Int32.Parse(TextBox3.Text);
+
+                string query = $"SELECT * FROM University WHERE UNIVERSITY_ID = {UniversityId}";
+                OtherEditForms(query);
+
+            }
+            else if (SelectionDropDownList.SelectedValue == "INSTITUTE")
+            {
+                InstituteId = Int32.Parse(TextBox4.Text);
+
+                string query = $"SELECT * FROM Institute WHERE INSTITUTE_ID = {InstituteId}";
+                OtherEditForms(query);
+            }
+            else if (SelectionDropDownList.SelectedValue == "SUPERVISOR")
+            {
+                SupervisorId = Int32.Parse(TextBox5.Text);
+
+                string query = $"SELECT * FROM Supervisor WHERE SUPERVISOR_ID = {SupervisorId}";
+                OtherEditForms(query);
+            }
+        }
+
+        void OtherEditForms(string query)
+        {
+
+            SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    OtherGridView.DataSource = dt;
+                    OtherGridView.DataBind();
+
+                    OperationWindow.Visible = true;
+                }
+                else
+                {
+                    Response.Write($"No VAL with id {ThesisNo} found!");
+                }
+                con.Close();
+                dt.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex);
+            }
+        }
+
+        void ThesisEditForm()
+        {
+            SelectionWindow.Visible = false;
+
             usefulFunctions.FillTypeList(DropDownList3);
             usefulFunctions.FillInstituteList(DropDownList4);
             usefulFunctions.FillTopicList(DropDownList1);
@@ -78,8 +163,8 @@ namespace Graduate_Thesis_System
             SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
             try
             {
-                Thesis_No = Int32.Parse(ThesisNoTextbox.Text);
-                string query = $"SELECT * FROM Thesis WHERE THESIS_NO = {Thesis_No}";
+                ThesisNo = Int32.Parse(ThesisNoTextbox.Text);
+                string query = $"SELECT * FROM Thesis WHERE THESIS_NO = {ThesisNo}";
 
                 SqlDataAdapter adapter = new SqlDataAdapter(query, con);
 
@@ -98,8 +183,7 @@ namespace Graduate_Thesis_System
                 }
                 else
                 {
-                    Response.Write($"No Thesis with id {Thesis_No} found!");
-                    ReturnHomeButton.Visible = true;
+                    Response.Write($"No Thesis with id {ThesisNo} found!");
                 }
                 con.Close();
                 dt.Dispose();
@@ -108,7 +192,6 @@ namespace Graduate_Thesis_System
             catch (Exception ex)
             {
                 Response.Write(ex);
-                ReturnHomeButton.Visible = true;
             }
         }
 
@@ -121,6 +204,70 @@ namespace Graduate_Thesis_System
         {
             Response.Redirect("Home.aspx");
 
+        }
+
+        protected void SelectionDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SelectionDropDownList.SelectedValue == "THESIS_NO")
+            {
+                ThesisEditWindow.Visible = true;
+                AuthorEditWindow.Visible = false;
+                TypeEditWindow.Visible = false;
+                UniversityEditWindow.Visible = false;
+                InstituteEditWindow.Visible = false;
+                SupervisorEditWindow.Visible = false;
+                FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+            }
+            else if (SelectionDropDownList.SelectedValue == "AUTHOR")
+            {
+                ThesisEditWindow.Visible = false;
+                AuthorEditWindow.Visible = true;
+                TypeEditWindow.Visible = false;
+                UniversityEditWindow.Visible = false;
+                InstituteEditWindow.Visible = false;
+                SupervisorEditWindow.Visible = false;
+                FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+            }
+            else if (SelectionDropDownList.SelectedValue == "TYPE")
+            {
+                ThesisEditWindow.Visible = false;
+                AuthorEditWindow.Visible = false;
+                TypeEditWindow.Visible = true;
+                UniversityEditWindow.Visible = false;
+                InstituteEditWindow.Visible = false;
+                SupervisorEditWindow.Visible = false;
+                FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+            }
+            else if (SelectionDropDownList.SelectedValue == "UNIVERSITY")
+            {
+                ThesisEditWindow.Visible = false;
+                AuthorEditWindow.Visible = false;
+                TypeEditWindow.Visible = false;
+                UniversityEditWindow.Visible = true;
+                InstituteEditWindow.Visible = false;
+                SupervisorEditWindow.Visible = false;
+                FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+            }
+            else if (SelectionDropDownList.SelectedValue == "INSTITUTE")
+            {
+                ThesisEditWindow.Visible = false;
+                AuthorEditWindow.Visible = false;
+                TypeEditWindow.Visible = false;
+                UniversityEditWindow.Visible = false;
+                InstituteEditWindow.Visible = true;
+                SupervisorEditWindow.Visible = false;
+                FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+            }
+            else if (SelectionDropDownList.SelectedValue == "SUPERVISOR")
+            {
+                ThesisEditWindow.Visible = false;
+                AuthorEditWindow.Visible = false;
+                TypeEditWindow.Visible = false;
+                UniversityEditWindow.Visible = false;
+                InstituteEditWindow.Visible = false;
+                SupervisorEditWindow.Visible = true;
+                FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+            }
         }
     }
 }

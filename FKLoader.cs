@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,54 @@ namespace Graduate_Thesis_System
         public Dictionary<int, string> cosupervisor = new Dictionary<int, string>();
         public Dictionary<int, string> type = new Dictionary<int, string>();
         public Dictionary<int, string> university = new Dictionary<int, string>();
+
+        public void BindGridView(GridView gridView)
+        {
+            SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
+
+            string query = "SELECT * FROM Thesis";
+            SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            gridView.DataSource = dt;
+            gridView.DataBind();
+            UpdateGridView(gridView);
+
+            con.Close();
+            dt.Dispose();
+        }
+        public void BindGridView(GridView gridView, DropDownList selectionDropDownList)
+        {
+            SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
+            string query = "";
+
+            if (selectionDropDownList.SelectedValue == "THESIS_NO")
+                query = "SELECT * FROM Thesis";
+            else if (selectionDropDownList.SelectedValue == "AUTHOR")
+                query = "SELECT * FROM Author";
+            else if (selectionDropDownList.SelectedValue == "TYPE")
+                query = "SELECT * FROM Type";
+            else if (selectionDropDownList.SelectedValue == "UNIVERSITY")
+                query = "SELECT * FROM University";
+            else if (selectionDropDownList.SelectedValue == "INSTITUTE")
+                query = "SELECT * FROM Institute";
+            else if (selectionDropDownList.SelectedValue == "SUPERVISOR")
+                query = "SELECT * FROM Supervisor";
+
+
+            SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            gridView.DataSource = dt;
+            gridView.DataBind();
+
+            con.Close();
+            dt.Dispose();
+        }
 
         public void UpdateGridView(GridView GridView)
         {
