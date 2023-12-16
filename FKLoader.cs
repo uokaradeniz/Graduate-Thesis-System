@@ -12,6 +12,7 @@ namespace Graduate_Thesis_System
         public Dictionary<int, string> author = new Dictionary<int, string>();
         public Dictionary<int, string> institute = new Dictionary<int, string>();
         public Dictionary<int, string> supervisor = new Dictionary<int, string>();
+        public Dictionary<int, string> cosupervisor = new Dictionary<int, string>();
         public Dictionary<int, string> type = new Dictionary<int, string>();
         public Dictionary<int, string> university = new Dictionary<int, string>();
 
@@ -22,6 +23,7 @@ namespace Graduate_Thesis_System
             LoadAuthorForeignKeyValues();
             LoadInstituteForeignKeyValues();
             LoadSupervisorForeignKeyValues();
+            LoadCosupervisorForeignKeyValues();
             LoadTypeForeignKeyValues();
 
             for (int i = 0; i < GridView.Rows.Count; i++)
@@ -31,8 +33,15 @@ namespace Graduate_Thesis_System
                 GridView.Rows[i].Cells[6].Text = university[Int32.Parse(GridView.Rows[i].Cells[6].Text)];
                 GridView.Rows[i].Cells[7].Text = institute[Int32.Parse(GridView.Rows[i].Cells[7].Text)];
                 GridView.Rows[i].Cells[8].Text = supervisor[Int32.Parse(GridView.Rows[i].Cells[8].Text)];
-                //Cosupervisor sonra bak
-                //GridView.Rows[i].Cells[9].Text = supervisor[Int32.Parse(GridView.Rows[i].Cells[8].Text)];
+                try
+                {
+                    GridView.Rows[i].Cells[9].Text = cosupervisor[Int32.Parse(GridView.Rows[i].Cells[9].Text)];
+                }
+                catch
+                {
+                    GridView.Rows[i].Cells[9].Text = "None";
+
+                }
             }
         }
         public void LoadAuthorForeignKeyValues()
@@ -45,7 +54,7 @@ namespace Graduate_Thesis_System
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                author.Add(Convert.ToInt32(reader["AUTHOR_ID"]), reader["FIRST_NAME"].ToString() + " " + reader["LAST_NAME"].ToString());
+                author.Add((int)reader["AUTHOR_ID"], reader["FIRST_NAME"].ToString() + " " + reader["LAST_NAME"].ToString());
             }
             conn.Close();
         }
@@ -75,6 +84,21 @@ namespace Graduate_Thesis_System
             while (reader.Read())
             {
                 supervisor.Add((int)reader["SUPERVISOR_ID"], reader["FIRST_NAME"].ToString() + " " + reader["LAST_NAME"].ToString());
+            }
+            conn.Close();
+
+        }
+        public void LoadCosupervisorForeignKeyValues()
+        {
+            SqlConnection conn = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True");
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT SUPERVISOR_ID, FIRST_NAME, LAST_NAME FROM Supervisor WHERE IS_CO_SUPERVISOR = 1", conn);
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = conn;
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                cosupervisor.Add((int)reader["SUPERVISOR_ID"], reader["FIRST_NAME"].ToString() + " " + reader["LAST_NAME"].ToString());
             }
             conn.Close();
 

@@ -14,7 +14,7 @@
             <div class="d-flex justify-content-center p-3">
                 <asp:Button ID="EditButton" runat="server" Text="Edit/Delete" CssClass="m-2 btn btn-danger" Width="200px" OnClick="EditButton_Click"/>
                 <asp:Button ID="SubmitButton" runat="server" Text="Submission" CssClass="m-2 btn btn-danger"  Width="200px" OnClick="SubmitButton_Click"/>
-                <asp:Button ID="SearchButton" runat="server" Text="Search" CssClass="m-2 btn btn-danger"  Width="200px"/>
+                <asp:Button ID="SearchButton" runat="server" Text="Search" CssClass="m-2 btn btn-danger"  Width="200px" OnClick="SearchButton_Click"/>
             </div>
         </nav>
 

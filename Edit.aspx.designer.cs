@@ -159,13 +159,13 @@ namespace Graduate_Thesis_System
         protected global::System.Web.UI.WebControls.Label Author;
 
         /// <summary>
-        /// Label6 control.
+        /// DropDownList6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList6;
 
         /// <summary>
         /// Year control.
@@ -231,13 +231,13 @@ namespace Graduate_Thesis_System
         protected global::System.Web.UI.WebControls.Label University;
 
         /// <summary>
-        /// Label5 control.
+        /// DropDownList7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList7;
 
         /// <summary>
         /// Institute control.
@@ -276,13 +276,13 @@ namespace Graduate_Thesis_System
         protected global::System.Web.UI.WebControls.Label SupervisorFname;
 
         /// <summary>
-        /// Label3 control.
+        /// DropDownList8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList8;
 
         /// <summary>
         /// Co_Supervisor control.
@@ -294,13 +294,13 @@ namespace Graduate_Thesis_System
         protected global::System.Web.UI.WebControls.Label Co_Supervisor;
 
         /// <summary>
-        /// Label4 control.
+        /// DropDownList9 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList9;
 
         /// <summary>
         /// Num_of_pages control.
@@ -445,6 +445,15 @@ namespace Graduate_Thesis_System
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button DeleteButton;
+
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
         /// ReturnHomeButton control.

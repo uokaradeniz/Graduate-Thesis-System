@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Data;
-using System.Configuration;
-using Newtonsoft.Json.Linq;
-using System.ComponentModel;
-using System.Collections;
-using System.Runtime.Remoting.Messaging;
 
 namespace Graduate_Thesis_System
 {
@@ -26,21 +21,11 @@ namespace Graduate_Thesis_System
                 usefulFunctions.FillTopicList(DropDownList1);
                 usefulFunctions.FillKeywordList(DropDownList2);
                 usefulFunctions.FillLanguageList(DropDownList5);
+                usefulFunctions.FillAuthorList(DropDownList6);
+                usefulFunctions.FillUniversityList(DropDownList7);
+                usefulFunctions.FillSupervisorList(DropDownList8);
+                usefulFunctions.FillCosupervisorList(DropDownList9);
             }
-        }
-    
-      
-
-        int ReturnLastIdentity(SqlCommand command)
-        {
-            int lastIdentity = 0;
-            object result = command.ExecuteScalar();
-            if (result != null)
-            {
-                lastIdentity = Convert.ToInt32(result);
-                return lastIdentity;
-            }
-            return -1;
         }
 
         protected void Submit_button_Click(object sender, EventArgs e)
@@ -49,58 +34,17 @@ namespace Graduate_Thesis_System
             try
             {
                 con.Open();
-
-                SqlCommand com = new SqlCommand();
-
-                com.Connection = con;
-                //author
-                com.CommandText = "SELECT IDENT_CURRENT('Author') AS LastIdentity";
-                int authorIdentity = ReturnLastIdentity(com);
-
-                com.CommandText = "INSERT INTO Author (FIRST_NAME, LAST_NAME) VALUES ('" + Firstname_textbox.Text + "','" + Lastname_textbox.Text + "')";
-                com.ExecuteNonQuery();
-
-                //university
-                com.CommandText = "SELECT IDENT_CURRENT('University') AS LastIdentity";
-                int universityIdentity = ReturnLastIdentity(com);
-
-                com.CommandText = "INSERT INTO University (NAME, INSTITUTE) VALUES ('" + University_textbox.Text + "','" +DropDownList4.SelectedValue+ "')";
-                com.ExecuteNonQuery();
-
-                //supervisor
-                com.CommandText = "SELECT IDENT_CURRENT('Supervisor') AS LastIdentity";
-                int supervisorIdentity = ReturnLastIdentity(com);
-
-                bool hasCoSupervisor = false;
-                if(Cosupervisor_textbox.Text != null)
-                {
-                    hasCoSupervisor = true;
-                } else
-                {
-                    hasCoSupervisor = false;
-                }
-                com.CommandText = "INSERT INTO Supervisor (FIRST_NAME, LAST_NAME, IS_CO_SUPERVISOR) VALUES ('" + SupervisorFname_textbox.Text + "','" + SupervisorLname_textbox.Text + "', '" + hasCoSupervisor + "')";
-                com.ExecuteNonQuery();
-
-
-                com.CommandText = "INSERT INTO Thesis (TITLE, ABSTRACT, AUTHOR, YEAR, TYPE, UNIVERSITY, INSTITUTE, SUPERVISOR, CO_SUPERVISOR, NUMBER_OF_PAGES, SUBJECT_TOPIC, KEYWORD, LANGUAGE, SUBMISSION_DATE) VALUES ('" + Title_textbox.Text + "','" + Abstract_textbox.Text + "','" + (authorIdentity + 1) + "','" + Int32.Parse(Year_textbox.Text) + "','" + DropDownList3.SelectedValue + "','" + (universityIdentity+1) + "','" + DropDownList4.SelectedValue + "','" + (supervisorIdentity+1) + "','" + (supervisorIdentity+1) + "','" + Int32.Parse(Num_of_pages_textbox.Text) + "','" + DropDownList1.Text + "','" + DropDownList2.Text + "','" + DropDownList5.Text + "', GETDATE())";
-                com.ExecuteNonQuery();
-
+                string query = "INSERT INTO Thesis (TITLE, ABSTRACT, AUTHOR, YEAR, TYPE, UNIVERSITY, INSTITUTE, SUPERVISOR, CO_SUPERVISOR, NUMBER_OF_PAGES, SUBJECT_TOPIC, KEYWORD, LANGUAGE, SUBMISSION_DATE) VALUES ('" + Title_textbox.Text + "','" + Abstract_textbox.Text + "','" + DropDownList6.SelectedValue + "','" + Int32.Parse(Year_textbox.Text) + "','" + DropDownList3.SelectedValue + "','" + DropDownList7.SelectedValue + "','" + DropDownList4.SelectedValue + "','" + DropDownList8.SelectedValue + "','" + DropDownList9.SelectedValue + "','" + Int32.Parse(Num_of_pages_textbox.Text) + "','" + DropDownList1.SelectedItem + "','" + DropDownList2.SelectedItem + "','" + DropDownList5.SelectedItem + "', GETDATE())";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
                 Literal1.Text = "<h3 class='h3 text-primary'> Submission accepted!</h1>";
 
             }
             catch (Exception ex)
             {
-                Response.Write(ex.ToString());
+                Response.Write(ex.Message);
             }
-            finally
-            {
-                if (con.State == ConnectionState.Open)
-                {
-                    con.Close();
-                }
-            }
-
         }
 
         protected void BackButton_Click(object sender, EventArgs e)

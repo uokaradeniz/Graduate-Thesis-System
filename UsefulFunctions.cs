@@ -50,6 +50,88 @@ namespace Graduate_Thesis_System
             da.Dispose();
 
         }
+        public void FillAuthorList(DropDownList dropDownList)
+        {
+            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
+
+            string query = "SELECT AUTHOR_ID, FIRST_NAME + ' ' + LAST_NAME AS FULL_NAME FROM Author";
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
+
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            dropDownList.DataSource = ds;
+            dropDownList.DataTextField = "FULL_NAME";
+            dropDownList.DataValueField = "AUTHOR_ID";
+            dropDownList.DataBind();
+
+            con.Close();
+            da.Dispose();
+
+        }
+        public void FillUniversityList(DropDownList dropDownList)
+        {
+            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
+
+            string query = "SELECT UNIVERSITY_ID, NAME FROM University";
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
+
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            dropDownList.DataSource = ds;
+            dropDownList.DataTextField = "NAME";
+            dropDownList.DataValueField = "UNIVERSITY_ID";
+            dropDownList.DataBind();
+
+            con.Close();
+            da.Dispose();
+
+        }
+        public void FillSupervisorList(DropDownList dropDownList)
+        {
+            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
+
+            string query = "SELECT SUPERVISOR_ID, FIRST_NAME + ' ' + LAST_NAME AS FULL_NAME FROM Supervisor";
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
+
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            dropDownList.DataSource = ds;
+            dropDownList.DataTextField = "FULL_NAME";
+            dropDownList.DataValueField = "SUPERVISOR_ID";
+            dropDownList.DataBind();
+
+            con.Close();
+            da.Dispose();
+
+        }
+
+        public void FillCosupervisorList(DropDownList dropDownList)
+        {
+            SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");
+
+            string query = "SELECT SUPERVISOR_ID, FIRST_NAME + ' ' + LAST_NAME AS FULL_NAME FROM Supervisor WHERE IS_CO_SUPERVISOR = 1";
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
+
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            dropDownList.DataSource = ds;
+            dropDownList.DataTextField = "FULL_NAME";
+            dropDownList.DataValueField = "SUPERVISOR_ID";
+            dropDownList.DataBind();
+
+            con.Close();
+            da.Dispose();
+
+        }
+
         public void FillTopicList(DropDownList dropDownList)
         {
             SqlConnection con = new SqlConnection("Data Source = UGUROGUZHANPC; Initial Catalog = GraduateThesisSystem; Integrated Security = True;");

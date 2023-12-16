@@ -16,10 +16,13 @@ namespace Graduate_Thesis_System
         UsefulFunctions usefulFunctions;
         protected void Page_Load(object sender, EventArgs e)
         {
+            // if (!IsPostBack)
+            //  {
             OperationWindow.Visible = false;
             ReturnHomeButton.Visible = false;
             FKLoader = new FKLoader();
             usefulFunctions = new UsefulFunctions();
+            // }
         }
 
         protected void EditButton_Click(object sender, EventArgs e)
@@ -27,7 +30,7 @@ namespace Graduate_Thesis_System
             SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
             try
             {
-                string query = "UPDATE Thesis SET TITLE = '" + Title_textbox.Text + "',ABSTRACT = '" + Abstract_textbox.Text + "', YEAR = '" + Year_textbox.Text + "', TYPE = '" + (DropDownList3.SelectedIndex + 1) + "', INSTITUTE = '" + (DropDownList4.SelectedIndex + 1) + "',  NUMBER_OF_PAGES = '" + Num_of_pages_textbox.Text + "',SUBJECT_TOPIC = '" + DropDownList1.SelectedItem +"', KEYWORD = '" + DropDownList2.SelectedItem + "', LANGUAGE = '" + DropDownList5.SelectedItem + "' WHERE THESIS_NO = '" + Thesis_No + "'";
+                string query = "UPDATE Thesis SET TITLE = '" + Title_textbox.Text + "',ABSTRACT = '" + Abstract_textbox.Text + "', AUTHOR = '" + DropDownList3.SelectedValue + "',YEAR = '" + Year_textbox.Text + "', TYPE = '" + DropDownList3.SelectedValue + "', UNIVERSITY = '" + DropDownList7.SelectedValue + "' ,INSTITUTE = '" + DropDownList4.SelectedValue + "', SUPERVISOR = '" + DropDownList8.SelectedValue + "',CO_SUPERVISOR = '" + DropDownList9.SelectedValue + "',NUMBER_OF_PAGES = '" + Num_of_pages_textbox.Text + "',SUBJECT_TOPIC = '" + DropDownList1.SelectedItem + "', KEYWORD = '" + DropDownList2.SelectedItem + "', LANGUAGE = '" + DropDownList5.SelectedItem + "' WHERE THESIS_NO = '" + Thesis_No + "'";
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -61,6 +64,16 @@ namespace Graduate_Thesis_System
         protected void ContinueButton_Click(object sender, EventArgs e)
         {
             SelectionWindow.Visible = false;
+            usefulFunctions.FillTypeList(DropDownList3);
+            usefulFunctions.FillInstituteList(DropDownList4);
+            usefulFunctions.FillTopicList(DropDownList1);
+            usefulFunctions.FillKeywordList(DropDownList2);
+            usefulFunctions.FillLanguageList(DropDownList5);
+            usefulFunctions.FillAuthorList(DropDownList6);
+            usefulFunctions.FillUniversityList(DropDownList7);
+            usefulFunctions.FillSupervisorList(DropDownList8);
+            usefulFunctions.FillCosupervisorList(DropDownList9);
+
 
             SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
             try
@@ -80,10 +93,6 @@ namespace Graduate_Thesis_System
                     GridView.DataSource = dt;
                     GridView.DataBind();
                     FKLoader.UpdateGridView(GridView);
-                    Title_textbox.Text = GridView.Rows[0].Cells[1].Text;
-                    Abstract_textbox.Text = GridView.Rows[0].Cells[2].Text;
-                    Year_textbox.Text = GridView.Rows[0].Cells[4].Text;
-                    Num_of_pages_textbox.Text = GridView.Rows[0].Cells[10].Text;
 
                     OperationWindow.Visible = true;
                 }
@@ -101,12 +110,6 @@ namespace Graduate_Thesis_System
                 Response.Write(ex);
                 ReturnHomeButton.Visible = true;
             }
-
-            usefulFunctions.FillTypeList(DropDownList3);
-            usefulFunctions.FillInstituteList(DropDownList4);
-            usefulFunctions.FillTopicList(DropDownList1);
-            usefulFunctions.FillKeywordList(DropDownList2);
-            usefulFunctions.FillLanguageList(DropDownList5);
         }
 
         protected void ReturnHomeButton_Click(object sender, EventArgs e)

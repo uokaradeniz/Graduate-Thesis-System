@@ -74,7 +74,9 @@
                         <asp:Label ID="Author" runat="server" Text="Author: "></asp:Label>
                     </td>
                     <td>
-                        <asp:Label ID="Label6" runat="server" Text=" X "></asp:Label>
+                        <asp:DropDownList ID="DropDownList6" Width="200px" runat="server">
+                        </asp:DropDownList>
+
                     </td>
                 </tr>
 
@@ -111,7 +113,9 @@
 
                     </td>
                     <td>
-                        <asp:Label ID="Label5" runat="server" Text=" X "></asp:Label>
+                        <asp:DropDownList ID="DropDownList7" Width="200px" runat="server">
+                        </asp:DropDownList>
+
                     </td>
 
                 </tr>
@@ -135,7 +139,8 @@
 
                     </td>
                     <td>
-                        <asp:Label ID="Label3" runat="server" Text=" X "></asp:Label>
+                        <asp:DropDownList ID="DropDownList8" Width="200px" runat="server">
+                        </asp:DropDownList>
 
                     </td>
 
@@ -147,7 +152,9 @@
 
                     </td>
                     <td>
-                        <asp:Label ID="Label4" runat="server" Text=" X "></asp:Label>
+                        <asp:DropDownList ID="DropDownList9" Width="200px" runat="server">
+                        </asp:DropDownList>
+
                     </td>
 
                 </tr>
@@ -224,6 +231,8 @@
 
             <asp:Button ID="EditButton" CssClass="m-2 btn btn-danger" runat="server" Text="Edit" OnClick="EditButton_Click" />
             <asp:Button ID="DeleteButton" CssClass="m-2 btn btn-danger" runat="server" Text="Delete" OnClick="DeleteButton_Click" CausesValidation="False" />
+            <asp:Button ID="Button1" CssClass="m-2 btn btn-danger" runat="server" Text="Back" OnClick="BackButton_Click" />
+
         </div>
         <asp:Button ID="ReturnHomeButton" CssClass="m-2 btn btn-danger" runat="server" Text="Return to Home Page" OnClick="ReturnHomeButton_Click" />
     </form>

@@ -47,5 +47,10 @@ namespace Graduate_Thesis_System
         {
             Response.Redirect("Edit.aspx");
         }
+
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Search.aspx");
+        }
     }
 }
