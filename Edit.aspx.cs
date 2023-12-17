@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.Ajax.Utilities;
+using System.Collections;
 
 namespace Graduate_Thesis_System
 {
@@ -22,11 +24,11 @@ namespace Graduate_Thesis_System
         UsefulFunctions usefulFunctions;
         protected void Page_Load(object sender, EventArgs e)
         {
-            OperationWindow.Visible = false;
             FKLoader = new FKLoader();
             usefulFunctions = new UsefulFunctions();
             if (!IsPostBack)
             {
+                OperationWindow.Visible = false;
                 usefulFunctions.FillOnlyFKThesisDDL(SelectionDropDownList);
                 SelectionDropDownList.Items[0].Text = "THESIS";
                 SelectionDropDownList.Items[0].Value = "THESIS_NO";
@@ -35,12 +37,11 @@ namespace Graduate_Thesis_System
             }
         }
 
-        protected void EditButton_Click(object sender, EventArgs e)
+        void EditSelection(string query)
         {
             SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
             try
             {
-                string query = "UPDATE Thesis SET TITLE = '" + Title_textbox.Text + "',ABSTRACT = '" + Abstract_textbox.Text + "', AUTHOR = '" + DropDownList3.SelectedValue + "',YEAR = '" + Year_textbox.Text + "', TYPE = '" + DropDownList3.SelectedValue + "', UNIVERSITY = '" + DropDownList7.SelectedValue + "' ,INSTITUTE = '" + DropDownList4.SelectedValue + "', SUPERVISOR = '" + DropDownList8.SelectedValue + "',CO_SUPERVISOR = '" + DropDownList9.SelectedValue + "',NUMBER_OF_PAGES = '" + Num_of_pages_textbox.Text + "',SUBJECT_TOPIC = '" + DropDownList1.SelectedItem + "', KEYWORD = '" + DropDownList2.SelectedItem + "', LANGUAGE = '" + DropDownList5.SelectedItem + "' WHERE THESIS_NO = '" + ThesisNo + "'";
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -49,15 +50,14 @@ namespace Graduate_Thesis_System
                 Response.Write("Operation Successfull!");
             }
             catch (Exception ex) { Response.Write(ex); }
-
         }
 
-        protected void DeleteButton_Click(object sender, EventArgs e)
+        void DeleteSelection(string query)
         {
+
             SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
             try
             {
-                string query = $"DELETE FROM Thesis WHERE THESIS_NO = {ThesisNo}";
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -69,46 +69,104 @@ namespace Graduate_Thesis_System
 
         }
 
+        protected void EditButton_Click(object sender, EventArgs e)
+        {
+            if (rblOptions.SelectedItem.Text == "Edit")
+            {
+                switch (SelectionDropDownList.SelectedValue)
+                {
+                    case "THESIS_NO":
+                        EditSelection("UPDATE Thesis SET TITLE = '" + Title_textbox.Text + "',ABSTRACT = '" + Abstract_textbox.Text + "', AUTHOR = '" + DropDownList3.SelectedValue + "',YEAR = '" + Year_textbox.Text + "', TYPE = '" + DropDownList3.SelectedValue + "', UNIVERSITY = '" + DropDownList7.SelectedValue + "' ,INSTITUTE = '" + DropDownList4.SelectedValue + "', SUPERVISOR = '" + DropDownList8.SelectedValue + "',CO_SUPERVISOR = '" + DropDownList9.SelectedValue + "',NUMBER_OF_PAGES = '" + Num_of_pages_textbox.Text + "',SUBJECT_TOPIC = '" + DropDownList1.SelectedItem + "', KEYWORD = '" + DropDownList2.SelectedItem + "', LANGUAGE = '" + DropDownList5.SelectedItem + "' WHERE THESIS_NO = '" + ThesisNo + "'");
+                        break;
+                    case "AUTHOR":
+                        EditSelection("UPDATE Author SET FIRST_NAME = '" + Author_fNameTextBox.Text + "', LAST_NAME = '" + Author_lNameTextBox.Text + "' WHERE AUTHOR_ID= '" + AuthorId + "'");
+                        break;
+                    case "TYPE":
+                        EditSelection("UPDATE Type SET TYPE_NAME = '" + Type_NameTextBox.Text + "' WHERE TYPE_ID = '" + TypeId + "'");
+                        break;
+                    case "UNIVERSITY":
+                        EditSelection("UPDATE University SET NAME = '" + University_NameTextBox.Text + "', INSTITUTE = '" + FRInstitute_DropDownList.SelectedValue + "' WHERE UNIVERSITY_ID = '" + UniversityId + "'");
+                        break;
+                    case "INSTITUTE":
+                        EditSelection("UPDATE Institute SET NAME = '" + Institute_NameTextBox.Text + "' WHERE INSTITUTE_ID = '" + InstituteId + "'");
+                        break;
+                    case "SUPERVISOR":
+                        EditSelection("UPDATE Supervisor SET FIRST_NAME = '" + Supervisor_FnameTextBox.Text + "', LAST_NAME = '" + Supervisor_LnameTextBox.Text + "', IS_CO_SUPERVISOR = '" + Cosupervisor_CheckBox.Checked + "' WHERE SUPERVISOR_ID = '" + SupervisorId + "'");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (SelectionDropDownList.SelectedValue)
+                {
+                    case "THESIS_NO":
+                        DeleteSelection($"DELETE FROM Thesis WHERE THESIS_NO = {ThesisNo}");
+                        break;
+                    case "AUTHOR":
+                        DeleteSelection($"DELETE FROM Author WHERE AUTHOR_ID = {AuthorId}");
+                        break;
+                    case "TYPE":
+                        DeleteSelection($"DELETE FROM Type WHERE TYPE_ID = {TypeId}");
+                        break;
+                    case "UNIVERSITY":
+                        DeleteSelection($"DELETE FROM University WHERE UNIVERSITY_ID = {UniversityId}");
+                        break;
+                    case "INSTITUTE":
+                        DeleteSelection($"DELETE FROM Institute WHERE INSTITUTE_ID = {InstituteId}");
+                        break;
+                    case "SUPERVISOR":
+                        DeleteSelection($"DELETE FROM Supervisor WHERE SUPERVISOR_ID = {SupervisorId}");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         protected void ContinueButton_Click(object sender, EventArgs e)
         {
             SelectionWindow.Visible = false;
             if (SelectionDropDownList.SelectedValue == "THESIS_NO")
             {
+                ThesisTable.Visible = true;
                 ThesisEditForm();
             }
             else if (SelectionDropDownList.SelectedValue == "AUTHOR")
             {
+                AuthorTable.Visible = true;
                 AuthorId = Int32.Parse(TextBox1.Text);
                 string query = $"SELECT * FROM Author WHERE AUTHOR_ID = {AuthorId}";
                 OtherEditForms(query);
-
             }
             else if (SelectionDropDownList.SelectedValue == "TYPE")
             {
+                TypeTable.Visible = true;
                 TypeId = Int32.Parse(TextBox2.Text);
-
                 string query = $"SELECT * FROM Type WHERE TYPE_ID = {TypeId}";
                 OtherEditForms(query);
             }
             else if (SelectionDropDownList.SelectedValue == "UNIVERSITY")
             {
+                UniversityTable.Visible = true;
+                usefulFunctions.FillInstituteList(FRInstitute_DropDownList);
                 UniversityId = Int32.Parse(TextBox3.Text);
-
                 string query = $"SELECT * FROM University WHERE UNIVERSITY_ID = {UniversityId}";
                 OtherEditForms(query);
 
             }
             else if (SelectionDropDownList.SelectedValue == "INSTITUTE")
             {
+                InstituteTable.Visible = true;
                 InstituteId = Int32.Parse(TextBox4.Text);
-
                 string query = $"SELECT * FROM Institute WHERE INSTITUTE_ID = {InstituteId}";
                 OtherEditForms(query);
             }
             else if (SelectionDropDownList.SelectedValue == "SUPERVISOR")
             {
+                SupervisorTable.Visible = true;
                 SupervisorId = Int32.Parse(TextBox5.Text);
-
                 string query = $"SELECT * FROM Supervisor WHERE SUPERVISOR_ID = {SupervisorId}";
                 OtherEditForms(query);
             }
@@ -267,6 +325,103 @@ namespace Graduate_Thesis_System
                 InstituteEditWindow.Visible = false;
                 SupervisorEditWindow.Visible = true;
                 FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+            }
+        }
+
+        protected void rblOptions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rblOptions.SelectedItem.Text == "Edit")
+            {
+
+                switch (SelectionDropDownList.SelectedValue)
+                {
+                    case "THESIS_NO":
+                        Title_textbox.Enabled = true;
+                        Abstract_textbox.Enabled = true;
+                        DropDownList1.Enabled = true;
+                        DropDownList2.Enabled = true;
+                        DropDownList3.Enabled = true;
+                        DropDownList4.Enabled = true;
+                        DropDownList5.Enabled = true;
+                        DropDownList6.Enabled = true;
+                        DropDownList7.Enabled = true;
+                        DropDownList8.Enabled = true;
+                        DropDownList9.Enabled = true;
+                        Year_textbox.Enabled = true;
+                        Num_of_pages_textbox.Enabled = true;
+                        RequiredFieldValidator1.Enabled = true;
+                        RequiredFieldValidator2.Enabled = true;
+                        RequiredFieldValidator4.Enabled = true;
+                        RequiredFieldValidator8.Enabled = true;
+                        break;
+                    case "AUTHOR":
+                        Author_fNameTextBox.Enabled = true;
+                        Author_lNameTextBox.Enabled = true;
+                        break;
+                    case "TYPE":
+                        Type_NameTextBox.Enabled = true;
+                        break;
+                    case "UNIVERSITY":
+                        University_NameTextBox.Enabled = true;
+                        FRInstitute_DropDownList.Enabled = true;
+                        break;
+                    case "INSTITUTE":
+                        Institute_NameTextBox.Enabled = true;
+                        break;
+                    case "SUPERVISOR":
+                        Supervisor_FnameTextBox.Enabled = true;
+                        Supervisor_LnameTextBox.Enabled = true;
+                        Cosupervisor_CheckBox.Enabled = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (SelectionDropDownList.SelectedValue)
+                {
+                    case "THESIS_NO":
+                        Title_textbox.Enabled = false;
+                        Abstract_textbox.Enabled = false;
+                        DropDownList1.Enabled = false;
+                        DropDownList2.Enabled = false;
+                        DropDownList3.Enabled = false;
+                        DropDownList4.Enabled = false;
+                        DropDownList5.Enabled = false;
+                        DropDownList6.Enabled = false;
+                        DropDownList7.Enabled = false;
+                        DropDownList8.Enabled = false;
+                        DropDownList9.Enabled = false;
+                        Year_textbox.Enabled = false;
+                        Num_of_pages_textbox.Enabled = false;
+                        RequiredFieldValidator1.Enabled = false;
+                        RequiredFieldValidator2.Enabled = false;
+                        RequiredFieldValidator4.Enabled = false;
+                        RequiredFieldValidator8.Enabled = false;
+                        break;
+                    case "AUTHOR":
+                        Author_fNameTextBox.Enabled = false;
+                        Author_lNameTextBox.Enabled = false;
+                        break;
+                    case "TYPE":
+                        Type_NameTextBox.Enabled = false;
+                        break;
+                    case "UNIVERSITY":
+                        University_NameTextBox.Enabled = false;
+                        FRInstitute_DropDownList.Enabled = false;
+                        break;
+                    case "INSTITUTE":
+                        Institute_NameTextBox.Enabled = false;
+                        break;
+                    case "SUPERVISOR":
+                        Supervisor_FnameTextBox.Enabled = false;
+                        Supervisor_LnameTextBox.Enabled = false;
+                        Cosupervisor_CheckBox.Enabled = false;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

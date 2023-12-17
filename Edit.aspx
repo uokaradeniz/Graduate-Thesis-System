@@ -101,194 +101,312 @@
             </asp:GridView>
             <asp:GridView ID="OtherGridView" CssClass="table-bordered table-hover" runat="server" AutoGenerateColumns="True">
             </asp:GridView>
+            <div class="container table table-bordered">
+                <!-- Table for thesis edit -->
+                <div class="col">
+                    <table id="ThesisTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                        <tr>
+                            <td>
+                                <asp:Label ID="Thesis_No" runat="server" Text="Thesis Number: "></asp:Label></td>
+                            <td>
+                                <asp:Label ID="Label1" runat="server" Text=" X "></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Title" runat="server" Text="Title:"></asp:Label></td>
+                            <td>
+                                <asp:TextBox ID="Title_textbox" Width="200px" runat="server"></asp:TextBox>
 
-            <!-- Table for thesis edit -->
-            <table class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="Title_textbox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Abstract" runat="server" Text="Abstract:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="Abstract_textbox" Width="200px" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="Abstract_textbox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Author" runat="server" Text="Author: "></asp:Label>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="DropDownList6" Width="200px" runat="server">
+                                </asp:DropDownList>
 
-                <tr>
-                    <td>
-                        <asp:Label ID="Thesis_No" runat="server" Text="Thesis Number: "></asp:Label></td>
-                    <td>
-                        <asp:Label ID="Label1" runat="server" Text=" X "></asp:Label></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Title" runat="server" Text="Title:"></asp:Label></td>
-                    <td>
-                        <asp:TextBox ID="Title_textbox" Width="200px" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
 
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="Title_textbox" ForeColor="Red"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Abstract" runat="server" Text="Abstract:"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="Abstract_textbox" Width="200px" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="Abstract_textbox" ForeColor="Red"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Author" runat="server" Text="Author: "></asp:Label>
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList6" Width="200px" runat="server">
-                        </asp:DropDownList>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Year" runat="server" Text="Year:"></asp:Label>
 
-                    </td>
-                </tr>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="Year_textbox" Width="200px" runat="server"></asp:TextBox>
 
-                <tr>
-                    <td>
-                        <asp:Label ID="Year" runat="server" Text="Year:"></asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ControlToValidate="Year_textbox" ForeColor="Red"></asp:RequiredFieldValidator>
 
-                    </td>
-                    <td>
-                        <asp:TextBox ID="Year_textbox" Width="200px" runat="server"></asp:TextBox>
+                            </td>
 
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ControlToValidate="Year_textbox" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Type" runat="server" Text="Type:"></asp:Label>
 
-                    </td>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="DropDownList3" Width="200px" runat="server">
+                                </asp:DropDownList>
 
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Type" runat="server" Text="Type:"></asp:Label>
+                            </td>
 
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList3" Width="200px" runat="server">
-                        </asp:DropDownList>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="University" runat="server" Text="University:"></asp:Label>
 
-                    </td>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="DropDownList7" Width="200px" runat="server">
+                                </asp:DropDownList>
 
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="University" runat="server" Text="University:"></asp:Label>
+                            </td>
 
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList7" Width="200px" runat="server">
-                        </asp:DropDownList>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Institute" runat="server" Text="Institute:"></asp:Label>
 
-                    </td>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="DropDownList4" Width="200px" runat="server">
+                                </asp:DropDownList>
 
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Institute" runat="server" Text="Institute:"></asp:Label>
+                            </td>
 
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList4" Width="200px" runat="server">
-                        </asp:DropDownList>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="SupervisorFname" runat="server" Text="Supervisor:"></asp:Label>
 
-                    </td>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="DropDownList8" Width="200px" runat="server">
+                                </asp:DropDownList>
 
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="SupervisorFname" runat="server" Text="Supervisor:"></asp:Label>
+                            </td>
 
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList8" Width="200px" runat="server">
-                        </asp:DropDownList>
+                        </tr>
 
-                    </td>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Co_Supervisor" runat="server" Text="Co-Supervisor: "></asp:Label>
 
-                </tr>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="DropDownList9" Width="200px" runat="server">
+                                </asp:DropDownList>
 
-                <tr>
-                    <td>
-                        <asp:Label ID="Co_Supervisor" runat="server" Text="Co-Supervisor: "></asp:Label>
+                            </td>
 
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList9" Width="200px" runat="server">
-                        </asp:DropDownList>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Num_of_pages" runat="server" Text="Number of Pages:"></asp:Label>
 
-                    </td>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="Num_of_pages_textbox" Width="200px" runat="server"></asp:TextBox>
 
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Num_of_pages" runat="server" Text="Number of Pages:"></asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*" ControlToValidate="Num_of_pages_textbox" ForeColor="Red"></asp:RequiredFieldValidator>
 
-                    </td>
-                    <td>
-                        <asp:TextBox ID="Num_of_pages_textbox" Width="200px" runat="server"></asp:TextBox>
+                            </td>
 
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*" ControlToValidate="Num_of_pages_textbox" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </tr>
 
-                    </td>
+                        <tr>
+                            <td>
+                                <asp:Label ID="SubjectTopic" runat="server" Text="Subject Topic:"></asp:Label>
 
-                </tr>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="DropDownList1" Width="200px" runat="server">
+                                </asp:DropDownList>
 
-                <tr>
-                    <td>
-                        <asp:Label ID="SubjectTopic" runat="server" Text="Subject Topic:"></asp:Label>
-
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList1" Width="200px" runat="server">
-                        </asp:DropDownList>
-
-                    </td>
-
-
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Keyword" runat="server" Text="Keyword:"></asp:Label>
-
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList2" Width="200px" runat="server">
-                        </asp:DropDownList>
-
-                    </td>
+                            </td>
 
 
-                </tr>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Keyword" runat="server" Text="Keyword:"></asp:Label>
 
-                <tr>
-                    <td>
-                        <asp:Label ID="Language" runat="server" Text="Language:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="DropDownList2" Width="200px" runat="server">
+                                </asp:DropDownList>
 
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="DropDownList5" Width="200px" runat="server">
-                        </asp:DropDownList>
+                            </td>
 
-                    </td>
 
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Submission_date" runat="server" Text="Submission Date: "></asp:Label>
+                        </tr>
 
-                    </td>
-                    <td>
-                        <asp:Label ID="Label2" runat="server" Text=" X "></asp:Label>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Language" runat="server" Text="Language:"></asp:Label>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:RadioButtonList ID="rblOptions" runat="server">
-                            <asp:ListItem Text="Edit Thesis" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="Delete Thesis" Value="2"></asp:ListItem>
-                        </asp:RadioButtonList>
-                    </td>
-                    <td>
-                        <asp:Button ID="EditButton" CssClass="m-2 btn btn-danger" runat="server" OnClick="EditButton_Click" Text="Finish" />
-                    </td>
-                </tr>
-            </table>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="DropDownList5" Width="200px" runat="server">
+                                </asp:DropDownList>
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Submission_date" runat="server" Text="Submission Date: "></asp:Label>
+
+                            </td>
+                            <td>
+                                <asp:Label ID="Label2" runat="server" Text=" X "></asp:Label>
+
+                            </td>
+                        </tr>
+
+                    </table>
+                    <table id="AuthorTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label3" runat="server" Text="Author ID: "></asp:Label></td>
+                            <td>
+                                <asp:Label ID="Label4" runat="server" Text=" X "></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label5" runat="server" Text="First Name:"></asp:Label></td>
+                            <td>
+                                <asp:TextBox ID="Author_fNameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="Author_fNameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label6" runat="server" Text="Last Name:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="Author_lNameTextBox" Width="200px" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ControlToValidate="Author_lNameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="TypeTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label7" runat="server" Text="Type ID: "></asp:Label></td>
+                            <td>
+                                <asp:Label ID="Label8" runat="server" Text=" X "></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label9" runat="server" Text="New Type:"></asp:Label></td>
+                            <td>
+                                <asp:TextBox ID="Type_NameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" ControlToValidate="Type_NameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="UniversityTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label10" runat="server" Text="University ID: "></asp:Label></td>
+                            <td>
+                                <asp:Label ID="Label11" runat="server" Text=" X "></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label12" runat="server" Text="University Name:"></asp:Label></td>
+                            <td>
+                                <asp:TextBox ID="University_NameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" ControlToValidate="University_NameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label13" runat="server" Text="Faculty Related Institute:"></asp:Label></td>
+                            <td>
+                                <asp:DropDownList ID="FRInstitute_DropDownList" runat="server"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" ControlToValidate="FRInstitute_DropDownList" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="InstituteTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label14" runat="server" Text="Institute ID: "></asp:Label></td>
+                            <td>
+                                <asp:Label ID="Label15" runat="server" Text=" X "></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label16" runat="server" Text="Institute Name:"></asp:Label></td>
+                            <td>
+                                <asp:TextBox ID="Institute_NameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*" ControlToValidate="Institute_NameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="SupervisorTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label17" runat="server" Text="Supervisor ID: "></asp:Label></td>
+                            <td>
+                                <asp:Label ID="Label18" runat="server" Text=" X "></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label19" runat="server" Text="First Name:"></asp:Label></td>
+                            <td>
+                                <asp:TextBox ID="Supervisor_FnameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="*" ControlToValidate="Supervisor_FnameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label20" runat="server" Text="Last Name:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="Supervisor_LnameTextBox" Width="200px" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*" ControlToValidate="Supervisor_LnameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label21" runat="server" Text="Co Supervisor? : "></asp:Label>
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="Cosupervisor_CheckBox" runat="server" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col">
+                    <asp:RadioButtonList ID="rblOptions" runat="server" OnSelectedIndexChanged="rblOptions_SelectedIndexChanged" AutoPostBack="True">
+                        <asp:ListItem Text="Edit" Value="1" Selected="True"></asp:ListItem>
+                        <asp:ListItem Text="Delete" Value="2"></asp:ListItem>
+                    </asp:RadioButtonList>
+                    <asp:Button ID="EditButton" CssClass="m-2 btn btn-danger" runat="server" OnClick="EditButton_Click" Text="Finish" />
+                </div>
+            </div>
         </div>
 
 
