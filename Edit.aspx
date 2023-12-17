@@ -76,7 +76,6 @@
                     <asp:GridView ID="SelectionGridView" CssClass="table-bordered table-hover" runat="server"></asp:GridView>
                 </div>
             </div>
-
         </div>
         <div id="OperationWindow" runat="server">
             <!-- Thesis edit GridView -->

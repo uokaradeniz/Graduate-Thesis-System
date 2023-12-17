@@ -9,10 +9,21 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="submission_container">
-            <h1 class="alert-warning text-center">Submission</h1>
+        <h1 class="alert-warning text-center">Submission</h1>
+        <div id="SelectionWindow" class="container" runat="server">
+            <div class="row">
+                <div class="col">
+                    <asp:Literal ID="Literal2" Text="Please choose subject to add:" runat="server"></asp:Literal>
+                    <asp:DropDownList ID="SelectionDropDownList" runat="server" OnSelectedIndexChanged="SelectionDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                    <br />
+                </div>
+            </div>
+        </div>
 
-            <table class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+        <div class="submission_container">
+            
+
+            <table id="ThesisTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
 
                 <tr>
                     <td>
@@ -71,8 +82,6 @@
                         <asp:DropDownList ID="DropDownList3" Width="200px" runat="server">
                         </asp:DropDownList>
 
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ControlToValidate="DropDownList3" ForeColor="Red"></asp:RequiredFieldValidator>
-
                     </td>
 
                 </tr>
@@ -96,8 +105,6 @@
                     <td>
                         <asp:DropDownList ID="DropDownList4" Width="200px" runat="server">
                         </asp:DropDownList>
-
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" ControlToValidate="DropDownList4" ForeColor="Red"></asp:RequiredFieldValidator>
 
                     </td>
 
@@ -150,8 +157,6 @@
                         <asp:DropDownList ID="DropDownList1" Width="200px" runat="server">
                         </asp:DropDownList>
 
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*" ControlToValidate="DropDownList1" ForeColor="Red"></asp:RequiredFieldValidator>
-
                     </td>
 
 
@@ -164,8 +169,6 @@
                     <td>
                         <asp:DropDownList ID="DropDownList2" Width="200px" runat="server">
                         </asp:DropDownList>
-
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*" ControlToValidate="DropDownList2" ForeColor="Red"></asp:RequiredFieldValidator>
 
                     </td>
 
@@ -181,8 +184,6 @@
                         <asp:DropDownList ID="DropDownList5" Width="200px" runat="server">
                         </asp:DropDownList>
 
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" ControlToValidate="DropDownList5" ForeColor="Red"></asp:RequiredFieldValidator>
-
                     </td>
 
                 </tr>
@@ -197,6 +198,126 @@
                     </td>
                 </tr>
             </table>
+            <table id="AuthorTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label3" runat="server" Text="Author ID: "></asp:Label></td>
+                    <td>
+                        <asp:Label ID="Label4" runat="server" Text=" X "></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label5" runat="server" Text="First Name:"></asp:Label></td>
+                    <td>
+                        <asp:TextBox ID="Author_fNameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="Author_fNameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label6" runat="server" Text="Last Name:"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="Author_lNameTextBox" Width="200px" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ControlToValidate="Author_lNameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+            </table>
+            <table id="TypeTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label7" runat="server" Text="Type ID: "></asp:Label></td>
+                    <td>
+                        <asp:Label ID="Label8" runat="server" Text=" X "></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label9" runat="server" Text="New Type:"></asp:Label></td>
+                    <td>
+                        <asp:TextBox ID="Type_NameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" ControlToValidate="Type_NameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+            </table>
+            <table id="UniversityTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label10" runat="server" Text="University ID: "></asp:Label></td>
+                    <td>
+                        <asp:Label ID="Label11" runat="server" Text=" X "></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label12" runat="server" Text="University Name:"></asp:Label></td>
+                    <td>
+                        <asp:TextBox ID="University_NameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" ControlToValidate="University_NameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label13" runat="server" Text="Faculty Related Institute:"></asp:Label></td>
+                    <td>
+                        <asp:DropDownList ID="FRInstitute_DropDownList" runat="server"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" ControlToValidate="FRInstitute_DropDownList" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+            </table>
+            <table id="InstituteTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label14" runat="server" Text="Institute ID: "></asp:Label></td>
+                    <td>
+                        <asp:Label ID="Label15" runat="server" Text=" X "></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label16" runat="server" Text="Institute Name:"></asp:Label></td>
+                    <td>
+                        <asp:TextBox ID="Institute_NameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*" ControlToValidate="Institute_NameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+            </table>
+            <table id="SupervisorTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label17" runat="server" Text="Supervisor ID: "></asp:Label></td>
+                    <td>
+                        <asp:Label ID="Label18" runat="server" Text=" X "></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label19" runat="server" Text="First Name:"></asp:Label></td>
+                    <td>
+                        <asp:TextBox ID="Supervisor_FnameTextBox" Width="200px" runat="server"></asp:TextBox>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="*" ControlToValidate="Supervisor_FnameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label20" runat="server" Text="Last Name:"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="Supervisor_LnameTextBox" Width="200px" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*" ControlToValidate="Supervisor_LnameTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label21" runat="server" Text="Co Supervisor? : "></asp:Label>
+                    </td>
+                    <td>
+                        <asp:CheckBox ID="Cosupervisor_CheckBox" runat="server" />
+                    </td>
+                </tr>
+            </table>
+
             <br />
             <asp:Literal ID="Literal1" runat="server"></asp:Literal>
             <br />
