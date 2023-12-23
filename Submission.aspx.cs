@@ -59,7 +59,11 @@ namespace Graduate_Thesis_System
             switch (SelectionDropDownList.SelectedValue)
             {
                 case "THESIS_NO":
-                    SubmitSelection("INSERT INTO Thesis (TITLE, ABSTRACT, AUTHOR, YEAR, TYPE, UNIVERSITY, INSTITUTE, SUPERVISOR, CO_SUPERVISOR, NUMBER_OF_PAGES, SUBJECT_TOPIC, KEYWORD, LANGUAGE, SUBMISSION_DATE) VALUES ('" + Title_textbox.Text + "','" + Abstract_textbox.Text + "','" + DropDownList6.SelectedValue + "','" + Int32.Parse(Year_textbox.Text) + "','" + DropDownList3.SelectedValue + "','" + DropDownList7.SelectedValue + "','" + DropDownList4.SelectedValue + "','" + DropDownList8.SelectedValue + "','" + DropDownList9.SelectedValue + "','" + Int32.Parse(Num_of_pages_textbox.Text) + "','" + DropDownList1.SelectedItem + "','" + DropDownList2.SelectedItem + "','" + DropDownList5.SelectedItem + "', GETDATE())");
+                    if (Co_SupervisorCheckBox.Checked)
+                        SubmitSelection("INSERT INTO Thesis (TITLE, ABSTRACT, AUTHOR, YEAR, TYPE, UNIVERSITY, INSTITUTE, SUPERVISOR, CO_SUPERVISOR, NUMBER_OF_PAGES, SUBJECT_TOPIC, KEYWORD, LANGUAGE, SUBMISSION_DATE) VALUES ('" + Title_textbox.Text + "','" + Abstract_textbox.Text + "','" + DropDownList6.SelectedValue + "','" + Int32.Parse(Year_textbox.Text) + "','" + DropDownList3.SelectedValue + "','" + DropDownList7.SelectedValue + "','" + DropDownList4.SelectedValue + "','" + DropDownList8.SelectedValue + "','" + DropDownList9.SelectedValue + "','" + Int32.Parse(Num_of_pages_textbox.Text) + "','" + DropDownList1.SelectedItem + "','" + DropDownList2.SelectedItem + "','" + DropDownList5.SelectedItem + "', GETDATE())");
+                    else
+                        SubmitSelection("INSERT INTO Thesis (TITLE, ABSTRACT, AUTHOR, YEAR, TYPE, UNIVERSITY, INSTITUTE, SUPERVISOR, CO_SUPERVISOR, NUMBER_OF_PAGES, SUBJECT_TOPIC, KEYWORD, LANGUAGE, SUBMISSION_DATE) VALUES ('" + Title_textbox.Text + "','" + Abstract_textbox.Text + "','" + DropDownList6.SelectedValue + "','" + Int32.Parse(Year_textbox.Text) + "','" + DropDownList3.SelectedValue + "','" + DropDownList7.SelectedValue + "','" + DropDownList4.SelectedValue + "','" + DropDownList8.SelectedValue + "','" + 0 + "','" + Int32.Parse(Num_of_pages_textbox.Text) + "','" + DropDownList1.SelectedItem + "','" + DropDownList2.SelectedItem + "','" + DropDownList5.SelectedItem + "', GETDATE())");
+
                     break;
                 case "AUTHOR":
                     SubmitSelection("INSERT INTO Author (FIRST_NAME, LAST_NAME) VALUES ('" + Author_fNameTextBox.Text + "','" + Author_lNameTextBox.Text + "')");
@@ -141,6 +145,18 @@ namespace Graduate_Thesis_System
                 UniversityTable.Visible = false;
                 InstituteTable.Visible = false;
                 SupervisorTable.Visible = true;
+            }
+        }
+
+        protected void Co_SupervisorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!Co_SupervisorCheckBox.Checked)
+            {
+                DropDownList9.Enabled = false;
+            }
+            else
+            {
+                DropDownList9.Enabled = true;
             }
         }
     }

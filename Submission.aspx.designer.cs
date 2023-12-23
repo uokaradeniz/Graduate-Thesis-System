@@ -267,6 +267,15 @@ namespace Graduate_Thesis_System
         protected global::System.Web.UI.WebControls.DropDownList DropDownList9;
 
         /// <summary>
+        /// Co_SupervisorCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox Co_SupervisorCheckBox;
+
+        /// <summary>
         /// Num_of_pages control.
         /// </summary>
         /// <remarks>

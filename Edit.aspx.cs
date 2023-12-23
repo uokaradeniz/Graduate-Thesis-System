@@ -76,7 +76,10 @@ namespace Graduate_Thesis_System
                 switch (SelectionDropDownList.SelectedValue)
                 {
                     case "THESIS_NO":
-                        EditSelection("UPDATE Thesis SET TITLE = '" + Title_textbox.Text + "',ABSTRACT = '" + Abstract_textbox.Text + "', AUTHOR = '" + DropDownList3.SelectedValue + "',YEAR = '" + Year_textbox.Text + "', TYPE = '" + DropDownList3.SelectedValue + "', UNIVERSITY = '" + DropDownList7.SelectedValue + "' ,INSTITUTE = '" + DropDownList4.SelectedValue + "', SUPERVISOR = '" + DropDownList8.SelectedValue + "',CO_SUPERVISOR = '" + DropDownList9.SelectedValue + "',NUMBER_OF_PAGES = '" + Num_of_pages_textbox.Text + "',SUBJECT_TOPIC = '" + DropDownList1.SelectedItem + "', KEYWORD = '" + DropDownList2.SelectedItem + "', LANGUAGE = '" + DropDownList5.SelectedItem + "' WHERE THESIS_NO = '" + ThesisNo + "'");
+                        if (Co_supervisorCheckBox.Checked)
+                            EditSelection("UPDATE Thesis SET TITLE = '" + Title_textbox.Text + "',ABSTRACT = '" + Abstract_textbox.Text + "', AUTHOR = '" + DropDownList3.SelectedValue + "',YEAR = '" + Year_textbox.Text + "', TYPE = '" + DropDownList3.SelectedValue + "', UNIVERSITY = '" + DropDownList7.SelectedValue + "' ,INSTITUTE = '" + DropDownList4.SelectedValue + "', SUPERVISOR = '" + DropDownList8.SelectedValue + "',CO_SUPERVISOR = '" + DropDownList9.SelectedValue + "',NUMBER_OF_PAGES = '" + Num_of_pages_textbox.Text + "',SUBJECT_TOPIC = '" + DropDownList1.SelectedItem + "', KEYWORD = '" + DropDownList2.SelectedItem + "', LANGUAGE = '" + DropDownList5.SelectedItem + "' WHERE THESIS_NO = '" + ThesisNo + "'");
+                        else
+                            EditSelection("UPDATE Thesis SET TITLE = '" + Title_textbox.Text + "',ABSTRACT = '" + Abstract_textbox.Text + "', AUTHOR = '" + DropDownList3.SelectedValue + "',YEAR = '" + Year_textbox.Text + "', TYPE = '" + DropDownList3.SelectedValue + "', UNIVERSITY = '" + DropDownList7.SelectedValue + "' ,INSTITUTE = '" + DropDownList4.SelectedValue + "', SUPERVISOR = '" + DropDownList8.SelectedValue + "',CO_SUPERVISOR = '" + 0 + "',NUMBER_OF_PAGES = '" + Num_of_pages_textbox.Text + "',SUBJECT_TOPIC = '" + DropDownList1.SelectedItem + "', KEYWORD = '" + DropDownList2.SelectedItem + "', LANGUAGE = '" + DropDownList5.SelectedItem + "' WHERE THESIS_NO = '" + ThesisNo + "'");
                         break;
                     case "AUTHOR":
                         EditSelection("UPDATE Author SET FIRST_NAME = '" + Author_fNameTextBox.Text + "', LAST_NAME = '" + Author_lNameTextBox.Text + "' WHERE AUTHOR_ID= '" + AuthorId + "'");
@@ -356,6 +359,7 @@ namespace Graduate_Thesis_System
                         RequiredFieldValidator2.Enabled = true;
                         RequiredFieldValidator4.Enabled = true;
                         RequiredFieldValidator8.Enabled = true;
+                        Co_supervisorCheckBox.Enabled = true;
                         break;
                     case "AUTHOR":
                         Author_fNameTextBox.Enabled = true;
@@ -402,6 +406,7 @@ namespace Graduate_Thesis_System
                         RequiredFieldValidator2.Enabled = false;
                         RequiredFieldValidator4.Enabled = false;
                         RequiredFieldValidator8.Enabled = false;
+                        Co_supervisorCheckBox.Enabled = false;
                         break;
                     case "AUTHOR":
                         Author_fNameTextBox.Enabled = false;
@@ -425,6 +430,18 @@ namespace Graduate_Thesis_System
                     default:
                         break;
                 }
+            }
+        }
+
+        protected void Co_supervisorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!Co_supervisorCheckBox.Checked)
+            {
+                DropDownList9.Enabled = false;
+            }
+            else
+            {
+                DropDownList9.Enabled = true;
             }
         }
     }

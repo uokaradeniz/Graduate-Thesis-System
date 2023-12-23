@@ -131,6 +131,8 @@
                         <asp:DropDownList ID="DropDownList9" Width="200px" runat="server">
                         </asp:DropDownList>
 
+                        <asp:CheckBox ID="Co_SupervisorCheckBox" runat="server" AutoPostBack="True" OnCheckedChanged="Co_SupervisorCheckBox_CheckedChanged" Checked="True" />
+
                     </td>
 
                 </tr>
