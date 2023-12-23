@@ -131,6 +131,7 @@ namespace Graduate_Thesis_System
             if (SelectionDropDownList.SelectedValue == "THESIS_NO")
             {
                 ThesisTable.Visible = true;
+
                 ThesisEditForm();
             }
             else if (SelectionDropDownList.SelectedValue == "AUTHOR")
@@ -275,6 +276,7 @@ namespace Graduate_Thesis_System
                 InstituteEditWindow.Visible = false;
                 SupervisorEditWindow.Visible = false;
                 FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+                FKLoader.UpdateGridView(SelectionGridView);
             }
             else if (SelectionDropDownList.SelectedValue == "AUTHOR")
             {
@@ -305,6 +307,7 @@ namespace Graduate_Thesis_System
                 InstituteEditWindow.Visible = false;
                 SupervisorEditWindow.Visible = false;
                 FKLoader.BindGridView(SelectionGridView, SelectionDropDownList);
+                FKLoader.UpdateUniversityGridView(SelectionGridView);
             }
             else if (SelectionDropDownList.SelectedValue == "INSTITUTE")
             {

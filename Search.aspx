@@ -14,7 +14,8 @@
         <div id="SelectionWindow" style="margin-top: 20%;" class="col-12 d-flex justify-content-center align-items-center" runat="server">
             <asp:Literal ID="Literal1" runat="server" Text="Search for a thesis by word: "></asp:Literal>
             <asp:TextBox ID="SearchTextBox" runat="server" CausesValidation="True"></asp:TextBox>
-            <asp:DropDownList ID="SearchDropDownList" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="SearchDropDownList" Visible="true" runat="server" OnSelectedIndexChanged="SelectDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+            <asp:DropDownList ID="SelectDropDownList" Visible="false" runat="server" AutoPostBack="True"></asp:DropDownList>
             <asp:RequiredFieldValidator ID="rfvInput" runat="server"
                 ControlToValidate="SearchTextBox"
                 ErrorMessage="Atleast 1 character is required."

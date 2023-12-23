@@ -13,9 +13,13 @@ namespace Graduate_Thesis_System
     public partial class Search : System.Web.UI.Page
     {
         UsefulFunctions usefulFunctions;
+        FKLoader fKLoader;
+        static bool selectionHasFK = false;
+        string searchWord;
         protected void Page_Load(object sender, EventArgs e)
         {
             usefulFunctions = new UsefulFunctions();
+            fKLoader = new FKLoader();
             if (!IsPostBack)
             {
                 ListItem all = new ListItem("All");
@@ -24,12 +28,14 @@ namespace Graduate_Thesis_System
             }
         }
 
-      
-
         protected void ContinueButton_Click(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
-            string searchWord = SearchTextBox.Text;
+           
+            if(!selectionHasFK)
+                searchWord = SearchTextBox.Text;
+            else
+                searchWord = SelectDropDownList.Text;
             con.Open();
             if (SearchDropDownList.SelectedItem.Text == "All")
             {
@@ -55,11 +61,88 @@ namespace Graduate_Thesis_System
                 GridView1.DataSource = dt;
             }
             GridView1.DataBind();
+            fKLoader.UpdateGridView(GridView1);
         }
 
         protected void BackButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("Home.aspx");
+        }
+
+        protected void SelectDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (SearchDropDownList.SelectedValue)
+            {
+                case "AUTHOR":
+                    usefulFunctions.FillAuthorList(SelectDropDownList);
+                    SelectDropDownList.Visible = true;
+                    SearchTextBox.Visible = false;
+                    rfvInput.Enabled = false;
+                    selectionHasFK = true;
+                    break;
+                case "TYPE":
+                    usefulFunctions.FillTypeList(SelectDropDownList);
+                    SelectDropDownList.Visible = true;
+                    SearchTextBox.Visible = false;
+                    rfvInput.Enabled = false;
+                    selectionHasFK = true;
+                    break;
+                case "UNIVERSITY":
+                    usefulFunctions.FillUniversityList(SelectDropDownList);
+                    SelectDropDownList.Visible = true;
+                    SearchTextBox.Visible = false;
+                    rfvInput.Enabled = false;
+                    selectionHasFK = true;
+                    break;
+                case "INSTITUTE":
+                    usefulFunctions.FillInstituteList(SelectDropDownList);
+                    SelectDropDownList.Visible = true;
+                    SearchTextBox.Visible = false;
+                    rfvInput.Enabled = false;
+                    selectionHasFK = true;
+                    break;
+                case "SUPERVISOR":
+                    usefulFunctions.FillSupervisorList(SelectDropDownList);
+                    SelectDropDownList.Visible = true;
+                    SearchTextBox.Visible = false;
+                    rfvInput.Enabled = false;
+                    selectionHasFK = true;
+                    break;
+                case "CO_SUPERVISOR":
+                    usefulFunctions.FillCosupervisorList(SelectDropDownList);
+                    SelectDropDownList.Visible = true;
+                    SearchTextBox.Visible = false;
+                    rfvInput.Enabled = false;
+                    selectionHasFK = true;
+                    break;
+                case "SUBJECT_TOPIC":
+                    usefulFunctions.FillTopicList(SelectDropDownList);
+                    SelectDropDownList.Visible = true;
+                    SearchTextBox.Visible = false;
+                    rfvInput.Enabled = false;
+                    selectionHasFK = true;
+                    break;
+                case "KEYWORD":
+                    usefulFunctions.FillKeywordList(SelectDropDownList);
+                    SelectDropDownList.Visible = true;
+                    SearchTextBox.Visible = false;
+                    rfvInput.Enabled = false;
+                    selectionHasFK = true;
+                    break;
+                case "LANGUAGE":
+                    usefulFunctions.FillLanguageList(SelectDropDownList);
+                    SelectDropDownList.Visible = true;
+                    SearchTextBox.Visible = false;
+                    rfvInput.Enabled = false;
+                    selectionHasFK = true;
+                    break;
+                default:
+                    SearchTextBox.Visible = true;
+                    SelectDropDownList.Visible = false;
+                    rfvInput.Enabled = true;
+                    selectionHasFK = false;
+                    break;
+            }
         }
     }
 }

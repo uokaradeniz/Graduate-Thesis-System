@@ -93,6 +93,17 @@ namespace Graduate_Thesis_System
                 }
             }
         }
+
+        public void UpdateUniversityGridView(GridView GridView)
+        {
+            //load institute foreignkey values to dictionaries to show them in gridview later
+            LoadInstituteForeignKeyValues();
+
+            for (int i = 0; i < GridView.Rows.Count; i++)
+            {
+                GridView.Rows[i].Cells[2].Text = institute[Int32.Parse(GridView.Rows[i].Cells[2].Text)];
+            }
+        }
         public void LoadAuthorForeignKeyValues()
         {
             SqlConnection conn = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True");
