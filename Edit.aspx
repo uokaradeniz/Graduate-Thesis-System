@@ -11,75 +11,106 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <h1 class="h1 alert-warning text-center p-2">Edit / Delete Thesis</h1>
+        <nav class="navbar alert-warning mb-3">
+            <h1 class="h1 navbar-text text-primary" style="text-align: center;">Graduate Thesis System</h1>
+            <h2 class="h2 navbar-text text-primary" style="text-align: center;">Edit - Delete</h2>
+            <div class="d-flex justify-content-center p-3 card-header bg-info bg-opacity-50">
+                <asp:Button ID="HomeButton" runat="server" Text="Home" CssClass="m-2 btn btn-danger" Width="200px" CausesValidation="False" OnClick="HomeButton_Click" />
+                <asp:Button ID="EditDeleteButton" runat="server" Text="Edit | Delete" CssClass="m-2 btn btn-danger" Width="200px" CausesValidation="False" OnClick="EditDeleteButton_Click" />
+                <asp:Button ID="SubmitButton" runat="server" Text="Submission" CssClass="m-2 btn btn-danger" Width="200px" OnClick="SubmitButton_Click" CausesValidation="False" />
+                <asp:Button ID="SearchButton" runat="server" Text="Search" CssClass="m-2 btn btn-danger" Width="200px" OnClick="SearchButton_Click" CausesValidation="False" />
+            </div>
+        </nav>
+
         <div id="SelectionWindow" class="container" runat="server">
-            <div class="row">
-                <div class="col">
+            <div class="card row mb-2">
+                <div class="col-sm text-center card-body">
                     <asp:Literal ID="Literal2" Text="Please choose the subject to edit:" runat="server"></asp:Literal>
                     <asp:DropDownList ID="SelectionDropDownList" runat="server" OnSelectedIndexChanged="SelectionDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                    <br />
-                </div>
-
-                <div class="col">
-                    <div id="ThesisEditWindow" class="col-8 d-flex justify-content-center align-items-center" runat="server">
-                        <asp:Literal ID="Literal1" runat="server" Text="Please enter a Thesis Number: "></asp:Literal>
-                        <asp:TextBox ID="ThesisNoTextbox" runat="server"></asp:TextBox>
-                        <br />
-                        <br />
-                        <asp:Button ID="ContinueButton" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
-                        <asp:Button ID="BackButton" CssClass="m-2 btn btn-danger" runat="server" Text="Back" OnClick="BackButton_Click" />
-                    </div>
-                    <div id="AuthorEditWindow" visible="false" class="col-8 d-flex justify-content-center align-items-center" runat="server">
-                        <asp:Literal ID="Literal3" runat="server" Text="Please enter Author ID: "></asp:Literal>
-                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                        <br />
-                        <br />
-                        <asp:Button ID="Button2" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
-                        <asp:Button ID="Button3" CssClass="m-2 btn btn-danger" runat="server" Text="Back" OnClick="BackButton_Click" />
-                    </div>
-                    <div id="TypeEditWindow" visible="false" class="col-8 d-flex justify-content-center align-items-center" runat="server">
-                        <asp:Literal ID="Literal4" runat="server" Text="Please enter Type ID: "></asp:Literal>
-                        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                        <br />
-                        <br />
-                        <asp:Button ID="Button4" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
-                        <asp:Button ID="Button5" CssClass="m-2 btn btn-danger" runat="server" Text="Back" OnClick="BackButton_Click" />
-                    </div>
-                    <div id="UniversityEditWindow" visible="false" class="col-8 d-flex justify-content-center align-items-center" runat="server">
-                        <asp:Literal ID="Literal5" runat="server" Text="Please enter University ID: "></asp:Literal>
-                        <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
-                        <br />
-                        <br />
-                        <asp:Button ID="Button6" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
-                        <asp:Button ID="Button7" CssClass="m-2 btn btn-danger" runat="server" Text="Back" OnClick="BackButton_Click" />
-                    </div>
-                    <div id="InstituteEditWindow" visible="false" class="col-8 d-flex justify-content-center align-items-center" runat="server">
-                        <asp:Literal ID="Literal6" runat="server" Text="Please enter Institute ID: "></asp:Literal>
-                        <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
-                        <br />
-                        <br />
-                        <asp:Button ID="Button8" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
-                        <asp:Button ID="Button9" CssClass="m-2 btn btn-danger" runat="server" Text="Back" OnClick="BackButton_Click" />
-                    </div>
-                    <div id="SupervisorEditWindow" visible="false" class="col-8 d-flex justify-content-center align-items-center" runat="server">
-                        <asp:Literal ID="Literal7" runat="server" Text="Please enter Supervisor ID: "></asp:Literal>
-                        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-                        <br />
-                        <br />
-                        <asp:Button ID="Button10" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
-                        <asp:Button ID="Button11" CssClass="m-2 btn btn-danger" runat="server" Text="Back" OnClick="BackButton_Click" />
-                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <asp:GridView ID="SelectionGridView" CssClass="table-bordered table-hover" runat="server"></asp:GridView>
+            <div class="card row mb-2">
+                <div class="col-sm text-center card-body">
+                    <div id="ThesisEditWindow" runat="server">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <asp:Literal ID="Literal1" runat="server" Text="Please enter a Thesis Number: "></asp:Literal>
+                                <asp:TextBox ID="ThesisNoTextbox" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*" ControlToValidate="ThesisNoTextbox" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </li>
+                            <li class="list-group-item">
+                                <asp:Button ID="ContinueButton" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="AuthorEditWindow" visible="false" runat="server">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <asp:Literal ID="Literal3" runat="server" Text="Please enter Author ID: "></asp:Literal>
+                                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </li>
+                            <li class="list-group-item">
+                                <asp:Button ID="Button2" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="TypeEditWindow" visible="false" runat="server">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <asp:Literal ID="Literal4" runat="server" Text="Please enter Type ID: "></asp:Literal>
+                                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*" ControlToValidate="TextBox2" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </li>
+                            <li class="list-group-item">
+                                <asp:Button ID="Button4" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="UniversityEditWindow" visible="false" runat="server">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <asp:Literal ID="Literal5" runat="server" Text="Please enter University ID: "></asp:Literal>
+                                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="*" ControlToValidate="TextBox3" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </li>
+                            <li class="list-group-item">
+                                <asp:Button ID="Button6" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="InstituteEditWindow" visible="false" runat="server">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <asp:Literal ID="Literal6" runat="server" Text="Please enter Institute ID: "></asp:Literal>
+                                <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*" ControlToValidate="TextBox4" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </li>
+                            <li class="list-group-item">
+                                <asp:Button ID="Button8" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="SupervisorEditWindow" visible="false" runat="server">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <asp:Literal ID="Literal7" runat="server" Text="Please enter Supervisor ID: "></asp:Literal>
+                                <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*" ControlToValidate="TextBox5" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </li>
+                            <li class="list-group-item">
+                                <asp:Button ID="Button10" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
         <div id="OperationWindow" runat="server">
+            <asp:GridView ID="OtherGridView" CssClass="table table-bordered table-hover table-sm table-info" runat="server" AutoGenerateColumns="True">
+            </asp:GridView>
             <!-- Thesis edit GridView -->
-            <asp:GridView ID="GridView" CssClass="table-bordered table-hover" runat="server" AutoGenerateColumns="False">
+            <asp:GridView ID="GridView" CssClass="table table-bordered table-hover table-sm table-info" runat="server" AutoGenerateColumns="False">
                 <Columns>
                     <asp:BoundField DataField="THESIS_NO" HeaderText="Thesis No" />
                     <asp:BoundField DataField="TITLE" HeaderText="Title" />
@@ -98,11 +129,10 @@
                     <asp:BoundField DataField="SUBMISSION_DATE" HeaderText="Submission Date" />
                 </Columns>
             </asp:GridView>
-            <asp:GridView ID="OtherGridView" CssClass="table-bordered table-hover" runat="server" AutoGenerateColumns="True">
-            </asp:GridView>
-            <div class="container table table-bordered">
+
+            <div class="container card bg-info p-3">
                 <!-- Table for thesis edit -->
-                <div class="col">
+                <div class="col card bg-opacity-75">
                     <table id="ThesisTable" visible="false" runat="server" class="col-12 table-bordered ms-5 ps-5 pb-2 pt-2 d-flex justify-content-center">
                         <tr>
                             <td>
@@ -400,18 +430,21 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col">
+                <div class="col card bg-opacity-75">
                     <asp:RadioButtonList ID="rblOptions" runat="server" OnSelectedIndexChanged="rblOptions_SelectedIndexChanged" AutoPostBack="True">
                         <asp:ListItem Text="Edit" Value="1" Selected="True"></asp:ListItem>
                         <asp:ListItem Text="Delete" Value="2"></asp:ListItem>
                     </asp:RadioButtonList>
-                    <asp:Button ID="EditButton" CssClass="m-2 btn btn-danger" runat="server" OnClick="EditButton_Click" Text="Finish" />
+                    <div class="d-grid d-md-flex justify-content-md-center">
+                        <asp:Button ID="EditButton" CssClass="m-2 btn btn-danger" runat="server" OnClick="EditButton_Click" Text="Finish" />
+                    </div>
                 </div>
             </div>
         </div>
 
+        <h2 class="h2 font-italic">Thesis Overview</h2>
+        <asp:GridView ID="SelectionGridView" CssClass="table table-bordered table-hover table-sm table-info" runat="server"></asp:GridView>
 
-        <asp:Button ID="Button1" CssClass="m-2 btn btn-danger" runat="server" Text="Return Home" OnClick="BackButton_Click" CausesValidation="False" />
     </form>
 </body>
 </html>

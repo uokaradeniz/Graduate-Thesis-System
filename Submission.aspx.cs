@@ -159,5 +159,25 @@ namespace Graduate_Thesis_System
                 DropDownList9.Enabled = true;
             }
         }
+
+        protected void HomeButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
+        }
+
+        protected void EditDeleteButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Edit.aspx");
+        }
+
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Submission.aspx");
+        }
+
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Search.aspx");
+        }
     }
 }

@@ -10,28 +10,42 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <h1 class="h1 alert-warning text-center p-2">Search Thesis</h1>
-        <div id="SelectionWindow" style="margin-top: 20%;" class="col-12 d-flex justify-content-center align-items-center" runat="server">
-            <asp:Literal ID="Literal1" runat="server" Text="Search for a thesis by word: "></asp:Literal>
-            <asp:TextBox ID="SearchTextBox" runat="server" CausesValidation="True"></asp:TextBox>
-            <asp:DropDownList ID="SearchDropDownList" Visible="true" runat="server" OnSelectedIndexChanged="SelectDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-            <asp:DropDownList ID="SelectDropDownList" Visible="false" runat="server" AutoPostBack="True"></asp:DropDownList>
-            <asp:RequiredFieldValidator ID="rfvInput" runat="server"
-                ControlToValidate="SearchTextBox"
-                ErrorMessage="Atleast 1 character is required."
-                Display="Dynamic" ForeColor="Red">
-            </asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="regexValidator" runat="server"
-                ControlToValidate="SearchTextBox"
-                ValidationExpression="^.{1,}$"
-                ErrorMessage="Atleast 1 character is required."
-                Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
-            <br />
-            <br />
-            <asp:Button ID="ContinueButton" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
-            <asp:Button ID="BackButton" CssClass="m-2 btn btn-danger" runat="server" Text="Back" OnClick="BackButton_Click" CausesValidation="False" />
-        </div>
+        <nav class="navbar alert-warning mb-3">
+            <h1 class="h1 navbar-text text-primary" style="text-align: center;">Graduate Thesis System</h1>
+            <h2 class="h2 navbar-text text-primary" style="text-align: center;">Search</h2>
+            <div class="d-flex justify-content-center p-3 card-header bg-info bg-opacity-50">
+                <asp:Button ID="HomeButton" runat="server" Text="Home" CssClass="m-2 btn btn-danger" Width="200px" CausesValidation="False" OnClick="HomeButton_Click" />
+                <asp:Button ID="EditDeleteButton" runat="server" Text="Edit | Delete" CssClass="m-2 btn btn-danger" Width="200px" CausesValidation="False" OnClick="EditDeleteButton_Click" />
+                <asp:Button ID="SubmitButton" runat="server" Text="Submission" CssClass="m-2 btn btn-danger" Width="200px" OnClick="SubmitButton_Click" CausesValidation="False" />
+                <asp:Button ID="SearchButton" runat="server" Text="Search" CssClass="m-2 btn btn-danger" Width="200px" OnClick="SearchButton_Click" CausesValidation="False" />
+            </div>
+        </nav>
 
+        <div id="SelectionWindow" style="margin-top: 20%;" class="col-12 d-flex justify-content-center align-items-center" runat="server">
+            <div class="row">
+                <asp:Literal ID="Literal1" runat="server" Text="Search for a thesis by word: "></asp:Literal>
+            </div>
+            <div class="row">
+                <asp:TextBox ID="SearchTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+                <asp:DropDownList ID="SelectDropDownList" Visible="false" runat="server" AutoPostBack="True"></asp:DropDownList>
+            </div>
+            <div class="row">
+                <asp:DropDownList ID="SearchDropDownList" Visible="true" runat="server" OnSelectedIndexChanged="SelectDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                <asp:RequiredFieldValidator ID="rfvInput" runat="server"
+                    ControlToValidate="SearchTextBox"
+                    ErrorMessage="Atleast 1 character is required."
+                    Display="Dynamic" ForeColor="Red">
+                </asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="regexValidator" runat="server"
+                    ControlToValidate="SearchTextBox"
+                    ValidationExpression="^.{1,}$"
+                    ErrorMessage="Atleast 1 character is required."
+                    Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
+            </div>
+            <div class="row">
+                <asp:Button ID="ContinueButton" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+            </div>
+        </div>
         <asp:GridView ID="GridView1" CssClass="table-bordered table-hover" runat="server" AutoGenerateColumns="false">
             <Columns>
                 <asp:BoundField DataField="THESIS_NO" HeaderText="Thesis No" />

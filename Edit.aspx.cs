@@ -131,6 +131,7 @@ namespace Graduate_Thesis_System
         protected void ContinueButton_Click(object sender, EventArgs e)
         {
             SelectionWindow.Visible = false;
+            SelectionGridView.Visible = false;
             if (SelectionDropDownList.SelectedValue == "THESIS_NO")
             {
                 ThesisTable.Visible = true;
@@ -210,6 +211,7 @@ namespace Graduate_Thesis_System
         void ThesisEditForm()
         {
             SelectionWindow.Visible = false;
+            SelectionGridView.Visible = false;
 
             usefulFunctions.FillTypeList(DropDownList3);
             usefulFunctions.FillInstituteList(DropDownList4);
@@ -443,6 +445,27 @@ namespace Graduate_Thesis_System
             {
                 DropDownList9.Enabled = true;
             }
+        }
+
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Submission.aspx");
+        }
+
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Search.aspx");
+
+        }
+
+        protected void HomeButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
+        }
+
+        protected void EditDeleteButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Edit.aspx");
         }
     }
 }

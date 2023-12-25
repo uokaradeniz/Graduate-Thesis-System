@@ -14,7 +14,7 @@ namespace Graduate_Thesis_System
         FKLoader FKLoader;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 FKLoader = new FKLoader();
                 FKLoader.BindGridView(GridView1);
@@ -26,14 +26,19 @@ namespace Graduate_Thesis_System
             Response.Redirect("Submission.aspx");
         }
 
-        protected void EditButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Edit.aspx");
-        }
-
         protected void SearchButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("Search.aspx");
+        }
+
+        protected void HomeButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
+        }
+
+        protected void EditDeleteButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Edit.aspx");
         }
     }
 }
