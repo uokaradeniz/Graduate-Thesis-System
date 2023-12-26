@@ -10,13 +10,16 @@
 <body>
     <form id="form1" runat="server">
         <nav class="navbar alert-warning mb-3">
-            <h1 class="h1 navbar-text text-primary" style="text-align: center;">Graduate Thesis System</h1>
-            <h2 class="h2 navbar-text text-primary" style="text-align: center;">Home</h2>
-            <div class="d-flex justify-content-center p-3 card-header bg-info bg-opacity-50">
-                <asp:Button ID="HomeButton" runat="server" Text="Home" CssClass="m-2 btn btn-danger" Width="200px" OnClick="HomeButton_Click" />
-                <asp:Button ID="EditDeleteButton" runat="server" Text="Edit | Delete" CssClass="m-2 btn btn-danger" Width="200px" OnClick="EditDeleteButton_Click" />
-                <asp:Button ID="SubmitButton" runat="server" Text="Submission" CssClass="m-2 btn btn-danger" Width="200px" OnClick="SubmitButton_Click" />
-                <asp:Button ID="SearchButton" runat="server" Text="Search" CssClass="m-2 btn btn-danger" Width="200px" OnClick="SearchButton_Click" />
+            <h1 class="h1 navbar-text text-primary" style="text-align: center;">
+                <img style="width: 75px" src="Logo.png" />
+                Graduate Thesis System</h1>
+            <h2 class="h2 navbar-text text-primary" style="text-align: center;">
+                <img style="width: 50px" src="HomeLogo.png" />Home</h2>
+            <div class="d-flex justify-content-center p-3 card-header bg-white bg-opacity-50 border border-warning rounded">
+                <asp:Button ID="HomeButton" runat="server" Text="Home" CssClass="m-2 btn btn-info" Width="200px" OnClick="HomeButton_Click" />
+                <asp:Button ID="EditDeleteButton" runat="server" Text="Edit | Delete" CssClass="m-2 btn btn-info" Width="200px" OnClick="EditDeleteButton_Click" />
+                <asp:Button ID="SubmitButton" runat="server" Text="Submission" CssClass="m-2 btn btn-info" Width="200px" OnClick="SubmitButton_Click" />
+                <asp:Button ID="SearchButton" runat="server" Text="Search" CssClass="m-2 btn btn-info" Width="200px" OnClick="SearchButton_Click" />
             </div>
         </nav>
 

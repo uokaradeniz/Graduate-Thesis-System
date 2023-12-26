@@ -45,9 +45,8 @@ namespace Graduate_Thesis_System
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
-                Response.Write($"{rowsAffected} row(s) affected.");
+                Literal8.Text = $"<h3 class='h3 text-primary'>{rowsAffected} row(s) affected. Operation Successful!</h3>";
                 con.Close();
-                Response.Write("Operation Successfull!");
             }
             catch (Exception ex) { Response.Write(ex); }
         }
@@ -61,9 +60,8 @@ namespace Graduate_Thesis_System
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
-                Response.Write($"{rowsAffected} row(s) affected.");
+                Literal8.Text = $"<h3 class='h3 text-primary'>{rowsAffected} row(s) affected. Operation Successful!</h3>";
                 con.Close();
-                Response.Write("Operation Successfull!");
             }
             catch (Exception ex) { Response.Write(ex.Message); }
 
@@ -196,7 +194,7 @@ namespace Graduate_Thesis_System
                 }
                 else
                 {
-                    Response.Write($"No VAL with id {ThesisNo} found!");
+                    Literal8.Text = $"<h3 class='h3 text-primary'>No Value with id {ThesisNo} found!</h3>";
                 }
                 con.Close();
                 dt.Dispose();
@@ -247,7 +245,7 @@ namespace Graduate_Thesis_System
                 }
                 else
                 {
-                    Response.Write($"No Thesis with id {ThesisNo} found!");
+                    Literal8.Text = $"<h3 class='h3 text-primary'>No Thesis with id {ThesisNo} found!</h3>";
                 }
                 con.Close();
                 dt.Dispose();

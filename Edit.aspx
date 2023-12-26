@@ -12,13 +12,15 @@
 <body>
     <form id="form1" runat="server">
         <nav class="navbar alert-warning mb-3">
-            <h1 class="h1 navbar-text text-primary" style="text-align: center;">Graduate Thesis System</h1>
-            <h2 class="h2 navbar-text text-primary" style="text-align: center;">Edit - Delete</h2>
-            <div class="d-flex justify-content-center p-3 card-header bg-info bg-opacity-50">
-                <asp:Button ID="HomeButton" runat="server" Text="Home" CssClass="m-2 btn btn-danger" Width="200px" CausesValidation="False" OnClick="HomeButton_Click" />
-                <asp:Button ID="EditDeleteButton" runat="server" Text="Edit | Delete" CssClass="m-2 btn btn-danger" Width="200px" CausesValidation="False" OnClick="EditDeleteButton_Click" />
-                <asp:Button ID="SubmitButton" runat="server" Text="Submission" CssClass="m-2 btn btn-danger" Width="200px" OnClick="SubmitButton_Click" CausesValidation="False" />
-                <asp:Button ID="SearchButton" runat="server" Text="Search" CssClass="m-2 btn btn-danger" Width="200px" OnClick="SearchButton_Click" CausesValidation="False" />
+            <h1 class="h1 navbar-text text-primary" style="text-align: center;"><img style="width: 75px" src="Logo.png" />
+                Graduate Thesis System</h1>
+            <h2 class="h2 navbar-text text-primary" style="text-align: center;">
+                <img style="width: 50px" src="EditLogo.png" />Edit - Delete</h2>
+            <div class="d-flex justify-content-center p-3 card-header bg-white bg-opacity-50 border border-warning rounded">
+                <asp:Button ID="HomeButton" runat="server" Text="Home" CssClass="m-2 btn btn-info" Width="200px" CausesValidation="False" OnClick="HomeButton_Click" />
+                <asp:Button ID="EditDeleteButton" runat="server" Text="Edit | Delete" CssClass="m-2 btn btn-info" Width="200px" CausesValidation="False" OnClick="EditDeleteButton_Click" />
+                <asp:Button ID="SubmitButton" runat="server" Text="Submission" CssClass="m-2 btn btn-info" Width="200px" OnClick="SubmitButton_Click" CausesValidation="False" />
+                <asp:Button ID="SearchButton" runat="server" Text="Search" CssClass="m-2 btn btn-info" Width="200px" OnClick="SearchButton_Click" CausesValidation="False" />
             </div>
         </nav>
 
@@ -39,7 +41,7 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*" ControlToValidate="ThesisNoTextbox" ForeColor="Red"></asp:RequiredFieldValidator>
                             </li>
                             <li class="list-group-item">
-                                <asp:Button ID="ContinueButton" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                                <asp:Button ID="ContinueButton" CssClass="m-2 btn btn-info" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
                             </li>
                         </ul>
                     </div>
@@ -51,7 +53,7 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
                             </li>
                             <li class="list-group-item">
-                                <asp:Button ID="Button2" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                                <asp:Button ID="Button2" CssClass="m-2 btn btn-info" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
                             </li>
                         </ul>
                     </div>
@@ -63,7 +65,7 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*" ControlToValidate="TextBox2" ForeColor="Red"></asp:RequiredFieldValidator>
                             </li>
                             <li class="list-group-item">
-                                <asp:Button ID="Button4" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                                <asp:Button ID="Button4" CssClass="m-2 btn btn-info" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
                             </li>
                         </ul>
                     </div>
@@ -75,7 +77,7 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="*" ControlToValidate="TextBox3" ForeColor="Red"></asp:RequiredFieldValidator>
                             </li>
                             <li class="list-group-item">
-                                <asp:Button ID="Button6" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                                <asp:Button ID="Button6" CssClass="m-2 btn btn-info" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
                             </li>
                         </ul>
                     </div>
@@ -87,7 +89,7 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*" ControlToValidate="TextBox4" ForeColor="Red"></asp:RequiredFieldValidator>
                             </li>
                             <li class="list-group-item">
-                                <asp:Button ID="Button8" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                                <asp:Button ID="Button8" CssClass="m-2 btn btn-info" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
                             </li>
                         </ul>
                     </div>
@@ -99,7 +101,7 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*" ControlToValidate="TextBox5" ForeColor="Red"></asp:RequiredFieldValidator>
                             </li>
                             <li class="list-group-item">
-                                <asp:Button ID="Button10" CssClass="m-2 btn btn-danger" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
+                                <asp:Button ID="Button10" CssClass="m-2 btn btn-info" runat="server" Text="Continue" OnClick="ContinueButton_Click" />
                             </li>
                         </ul>
                     </div>
@@ -436,7 +438,7 @@
                         <asp:ListItem Text="Delete" Value="2"></asp:ListItem>
                     </asp:RadioButtonList>
                     <div class="d-grid d-md-flex justify-content-md-center">
-                        <asp:Button ID="EditButton" CssClass="m-2 btn btn-danger" runat="server" OnClick="EditButton_Click" Text="Finish" />
+                        <asp:Button ID="EditButton" CssClass="m-2 btn btn-info" runat="server" OnClick="EditButton_Click" Text="Finish" />
                     </div>
                 </div>
             </div>
@@ -444,7 +446,7 @@
 
         <h2 class="h2 font-italic">Thesis Overview</h2>
         <asp:GridView ID="SelectionGridView" CssClass="table table-bordered table-hover table-sm table-info" runat="server"></asp:GridView>
-
+        <asp:Literal ID="Literal8" runat="server"></asp:Literal>
     </form>
 </body>
 </html>

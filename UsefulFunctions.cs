@@ -217,8 +217,5 @@ namespace Graduate_Thesis_System
 
             con.Close();
         }
-
-
     }
-
 }

@@ -30,6 +30,7 @@ namespace Graduate_Thesis_System
 
         protected void ContinueButton_Click(object sender, EventArgs e)
         {
+            resultText.Visible = true;
             SqlConnection con = new SqlConnection("Data Source=UGUROGUZHANPC;Initial Catalog=GraduateThesisSystem;Integrated Security=True;");
            
             if(!selectionHasFK)
