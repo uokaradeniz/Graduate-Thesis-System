@@ -45,7 +45,7 @@ namespace Graduate_Thesis_System
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
-                Literal1.Text = "<h3 class='h3 text-primary'> Submission accepted!</h1>";
+                Literal1.Text = "<h3 class='h3 text-primary'> Submission accepted!</h3>";
 
             }
             catch (Exception ex)
